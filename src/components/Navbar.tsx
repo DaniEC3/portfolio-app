@@ -1,19 +1,15 @@
-import Link from "next/link";
-import Image from "next/image";
+import { House } from 'lucide-react';
 
-export default function Navbar() {
+
+export default function NavbarComponent() {
   return (
-      <nav className="bg-black shadow-md px-6 flex justify-between items-center">
-        <div>
-          <a>
-            <Image src={"/Logo/mainLogo-B.png"} alt='Logo' width={100} height={100}></Image>
-          </a>
-        </div>
-          <ul className="flex gap-6 ">
-            <li><Link href = "#" className="hover:text-indigo-400 transition">Home</Link></li>
-            <li><Link href = "#">About me</Link></li>
-            <li><Link href = "#">Contact</Link></li>
-          </ul>
+      <nav className="flex p-4 bg-gray-800 h-40 text-white justify-center ">
+        <ul className="flex space-x-4">
+          {/* <li><a href="/" className="hover:underline">Home</a></li> */}
+          <li><a href="#about" className="hover:underline"><House /></a></li>
+          <li><a href="#projects" className="hover:underline">Projects</a></li>
+          <li><a href="#contact" className="hover:underline">Contact</a></li>
+        </ul>
       </nav>
   )
 }

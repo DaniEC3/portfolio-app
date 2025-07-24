@@ -1,7 +1,17 @@
+import NavbarComponent from '@/components/Navbar';
+import FooterComponent from "@/components/Footer";
+import ProjectsComponent from "@/components/Projects";
+import AboutComponent from "@/components/About";
+import HeroComponent from "@/components/Hero";
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-r from-indigo-500 via-red-500 to-pink-500 flex items-center justify-center">
-      <h1 className="font-sans text-white text-4xl font-extrabold">Tailwind + TypeScript works! 🚀</h1>
+    <main className="scroll-smooth">
+      <NavbarComponent></NavbarComponent>
+      <HeroComponent></HeroComponent>
+      <AboutComponent></AboutComponent>
+      <ProjectsComponent></ProjectsComponent>
+      <FooterComponent></FooterComponent>
     </main>
   )
 }
