@@ -5,7 +5,7 @@ import ThemeToggleComponent from './ThemeToggle';
 
 export default function HeaderComponent() {
   return (
-    <div className=" p-4 text-gray-800 bg-primary 
+    <div className=" p-4 text-gray-800 
       mask-b-from-85%  
        " >
       <div className='w-full justify-end'>

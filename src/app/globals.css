@@ -1,24 +1,19 @@
 @import "tailwindcss";
-@import "tw-elements";
 
-/* Root fallback (optional) */
 :root {
-  --primary-color: 59, 130, 246; /* Tailwind blue-500 in RGB */
-  --primary-font: 'Space Grotesk', sans-serif;
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-/* Light Theme */
-html.light {
-  --primary-color: 59, 130, 246; /* Tailwind blue-500 */
-  --background-color: 255, 255, 255; /* White */
-  --text-color: 31, 41, 55;          /* Gray-800 */
-  --primary-font: 'Space Grotesk', sans-serif;
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
-/* Dark Theme */
-html.dark {
-  --primary-color: 147, 197, 253; /* Tailwind blue-300 */
-  --background-color: 17, 24, 39;  /* Gray-900 */
-  --text-color: 255, 255, 255;     /* White */
-  --primary-font: 'Space Grotesk', sans-serif;
+body {
+  background: var(--background);
+  color: var(--foreground);
 }
