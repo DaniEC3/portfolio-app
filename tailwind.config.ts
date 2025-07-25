@@ -1,4 +1,6 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
+
 
 const config: Config = {
   darkMode: 'class',
@@ -12,11 +14,18 @@ const config: Config = {
         custom: ['var(--primary-font)']
       },
       colors: {
-        
+        primary: 'rgb(var(--primary-color) / <alpha-value>)',
+        background: 'rgb(var(--background-color) / <alpha-value>)',
+        text: 'rgb(var(--text-color) / <alpha-value>)',
       }
 
     },
   },
-  plugins: [],
+  plugins:
+    [
+      animate
+    ],
 }
+
+
 export default config
