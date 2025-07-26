@@ -6,12 +6,15 @@ import HeroComponent from "@/components/Hero";
 
 export default function Home() {
   return (
-    <main className="scroll-smooth">
-      <HeaderComponent></HeaderComponent>
-      <HeroComponent></HeroComponent>
-      <AboutComponent></AboutComponent>
-      <ProjectsComponent></ProjectsComponent>
+    <div className='min-h-screen flex flex-col'>
+
+      <main className="scroll-smooth flex-grow">
+        <HeaderComponent></HeaderComponent>
+        <HeroComponent></HeroComponent>
+        <AboutComponent></AboutComponent>
+        <ProjectsComponent></ProjectsComponent>
+      </main>
       <FooterComponent></FooterComponent>
-    </main>
+    </div>
   )
 }
