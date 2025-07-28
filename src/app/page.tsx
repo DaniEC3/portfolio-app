@@ -10,11 +10,18 @@ export default function Home() {
 
       <main className="scroll-smooth flex-grow">
         <HeaderComponent></HeaderComponent>
+        <div id="home">
         <HeroComponent></HeroComponent>
+        </div>
         <AboutComponent></AboutComponent>
-        <ProjectsComponent></ProjectsComponent>
+        <div id="projects" className="scroll-mt-20">
+          <ProjectsComponent></ProjectsComponent>
+        </div>
       </main>
-      <FooterComponent></FooterComponent>
+      <div id="contact">
+        <FooterComponent></FooterComponent>
+      </div>
+
     </div>
   )
 }

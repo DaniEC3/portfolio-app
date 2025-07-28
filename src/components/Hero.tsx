@@ -1,9 +1,28 @@
-import React from 'react'
+import Image from "next/image";
 
 export default function HeroComponent() {
   return (
-    <div className="h-96 p-8 bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
-      <h1 className="text-2xl font-bold">Welcome to my site</h1>
-    </div>
+    <section className="flex flex-col justify-center items-center text-center h-full px-4 bg-white
+    transition-all duration-500 ease-in-out p-10">
+      <Image
+        src="/Profile-Picture.jpg"
+        alt="Daniel profile"
+        width={240}
+        height={240}
+        className="rounded-full mb-10 "
+      />
+      <h1 className="text-gray-950 text-4xl sm:text-5xl font-bold mb-4">
+        Hi, I am Daniel 👋
+      </h1>
+      <p className=" text-gray-950 text-xl sm:text-2xl max-w-xl mb-6">
+        I am a Full-stack-Web Developer passionate about crafting clean, modern web experiences using toosl like React, Next.js, and Tailwind CSS.
+      </p>
+      <a
+        href="#projects"
+        className="px-6 py-3 bg-gray-800 text-white dark:bg-white dark:text-black font-semibold rounded-lg shadow hover:scale-105 transition"
+      >
+        See My Work
+      </a>
+    </section>
   )
 }
