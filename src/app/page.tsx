@@ -13,10 +13,11 @@ export default function Home() {
         <div id="home">
         <HeroComponent></HeroComponent>
         </div>
-        <AboutComponent></AboutComponent>
+        
         <div id="projects" className="scroll-mt-20">
           <ProjectsComponent></ProjectsComponent>
         </div>
+        <AboutComponent></AboutComponent>
       </main>
       <div id="contact">
         <FooterComponent></FooterComponent>
