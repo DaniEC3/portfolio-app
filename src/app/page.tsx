@@ -3,6 +3,7 @@ import FooterComponent from "@/components/Footer";
 import ProjectsComponent from "@/components/Projects";
 import AboutComponent from "@/components/About";
 import HeroComponent from "@/components/Hero";
+import SkillsComponent from '@/components/Skills';
 
 export default function Home() {
   return (
@@ -13,11 +14,11 @@ export default function Home() {
         <div id="home">
         <HeroComponent></HeroComponent>
         </div>
-        
+        <AboutComponent></AboutComponent>
         <div id="projects" className="scroll-mt-20">
           <ProjectsComponent></ProjectsComponent>
         </div>
-        <AboutComponent></AboutComponent>
+        <SkillsComponent></SkillsComponent>
       </main>
       <div id="contact">
         <FooterComponent></FooterComponent>
