@@ -13,12 +13,13 @@ export default function SkillsComponent() {
     { name: 'Git', level: 70, color: 'bg-gray-400' },
   ]
   return (
-    <section className='h-screen bg-gray-200 p-8 text-gray-900 flex flex-col items-center justify-center w-full'>
+    <section className='h-screen bg-gray-200 p-8 text-gray-900 flex flex-col items-center
+    justify-center w-full'>
       <div className='p-4 text-2xl font-semibold'>My Skills!!</div>
       <div className='grid grid-cols-1 justify-center sm:grid-cols-2 md:grid-cols-3 
       gap-2 w-full max-w-4xl'>
         {skills.map((skill) => (
-          <div key={skill.name} className='mb-4 flex justify-center '>
+          <div key={skill.name} className='mb-4 flex justify-center'>
             
             <div className=' w-full m-5 bg-gray-300 rounded-full h-12 dark:bg-gray-700 group flex items-center
              relative overflow-hidden border-2 border-gray-600 hover:cursor-pointer'>
