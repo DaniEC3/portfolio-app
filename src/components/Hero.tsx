@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function HeroComponent() {
   return (
     <section className="flex flex-col justify-center items-center text-center h-screen px-4 bg-gray-200
-    transition-all duration-500 ease-in-out p-10">
+    transition-all duration-500  p-10">
       <Image
         src="/Profile-Picture.jpg"
         alt="Daniel profile"
