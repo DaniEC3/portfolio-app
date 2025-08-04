@@ -4,6 +4,7 @@ import ProjectsComponent from "@/components/Projects";
 import AboutComponent from "@/components/About";
 import HeroComponent from "@/components/Hero";
 import SkillsComponent from '@/components/Skills';
+import ScrollAnimation from '@/animations/ScrollAnimation';
 
 
 
@@ -19,7 +20,9 @@ export default function Home() {
         <div id="home">
           <HeroComponent />
         </div>
-        <AboutComponent />
+        <ScrollAnimation>
+          <AboutComponent />
+        </ScrollAnimation>
         <div id="projects" className="scroll-mt-20">
           <ProjectsComponent />
         </div>

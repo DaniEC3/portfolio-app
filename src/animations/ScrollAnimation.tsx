@@ -17,13 +17,13 @@ export default function ScrollAnimation({children, delay = 0}:ScrollAnimationPro
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0,y: 50 }}
+      initial={{ y: 50 }}
       animate={
         isInView 
         ? { opacity: 1, y: 0 } 
-        : { opacity: 0, y: 50 }
+        : { opacity: 1, y: 150 }
       }
-      transition={{ duration: 4, delay }}
+      transition={{ duration: 1, delay }}
     >
       {children}
     </motion.div>
