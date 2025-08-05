@@ -20,9 +20,9 @@ export default function Home() {
         <div id="home">
           <HeroComponent />
         </div>
-        <ScrollAnimation>
+
           <AboutComponent />
-        </ScrollAnimation>
+
         <div id="projects" className="scroll-mt-20">
           <ProjectsComponent />
         </div>

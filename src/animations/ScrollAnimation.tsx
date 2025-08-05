@@ -1,31 +1,71 @@
 'use client';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRef } from 'react';
 
 interface ScrollAnimationProps {
   children: React.ReactNode;
   delay?: number;
+  stagger?: boolean;
 }
 
-export default function ScrollAnimation({children, delay = 0}:ScrollAnimationProps) {  
 
-  const ref = useRef(null)
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const childVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
+
+export default function ScrollAnimation({
+  children,
+  delay = 0,
+  stagger = false
+}: ScrollAnimationProps) {
+
+  const ref = useRef(null);
   const isInView = useInView(ref, {
-    once: true 
+    once: true
   });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ y: 50 }}
+      variants={containerVariants}
+      initial="hidden"
       animate={
-        isInView 
-        ? { opacity: 1, y: 0 } 
-        : { opacity: 1, y: 150 }
+        isInView
+          ? 'visible'
+          : 'hidden'
       }
       transition={{ duration: 1, delay }}
     >
-      {children}
+      {/* If stagger is true, children must have child variants */}
+      {stagger
+        ? (
+          // Apply variants to each child if stagger is true
+          (Array.isArray(children) ? children : [children]).map((child, i) => (
+            <motion.div key={i} variants={childVariants}>
+              {child}
+            </motion.div>
+          ))
+        )
+        : (
+          // If not stagger, animate the whole block
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+            transition={{ duration: 1, delay }}
+          >
+            {children}
+          </motion.div>
+        )}
     </motion.div>
   );
 }
