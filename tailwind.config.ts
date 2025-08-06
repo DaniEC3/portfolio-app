@@ -10,8 +10,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'hero-pattern': "url('//to/image.svg')",
+      },
       fontFamily: {
-        custom: ['var(--primary-font)']
+        sans: ['var(--font-space-grotesk)', 'sans-serif'],
+        script: ['var(--font-great-vibes)', 'cursive'],
       },
       colors: {
         primary: 'rgb(var(--primary-color) / <alpha-value>)',

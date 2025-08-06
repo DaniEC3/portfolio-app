@@ -4,7 +4,7 @@ import ProjectsComponent from "@/components/Projects";
 import AboutComponent from "@/components/About";
 import HeroComponent from "@/components/Hero";
 import SkillsComponent from '@/components/Skills';
-import ScrollAnimation from '@/animations/ScrollAnimation';
+
 
 
 
