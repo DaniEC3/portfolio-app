@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetchGitHubProjects } from '@/app/lib/github';
 import Image from 'next/image';
 import ScrollAnimation from '@/animations/ScrollAnimation';
-import { AnimatedBackground } from './AnimatedBackground';
+import { AnimatedBackground } from './Styles/AnimatedBackground';
 
 
 interface Repo {

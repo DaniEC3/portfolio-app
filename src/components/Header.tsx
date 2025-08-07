@@ -6,10 +6,28 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import ThemeToggleComponent from './ThemeToggle';
+import GlitchIconWrapper from './Styles/GlitchIconWrapper';
+
 
 export default function HeaderComponent() {
   const [isAtTop, setIsAtTop] = useState(true);
-
+  const navItems = [
+    {
+      label: 'Home',
+      href: '#home',
+      icon: House,
+    },
+    {
+      label: 'Projects',
+      href: '#projects',
+      icon: BriefcaseBusiness,
+    },
+    {
+      label: 'Contact',
+      href: '#contact',
+      icon: Contact,
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,58 +76,30 @@ export default function HeaderComponent() {
 
         <nav className='flex justify-center'>
           <ul className={clsx(
-            "flex gap-6 text-gray-200 transition-all duration-300 ",
-            isAtTop ? 'p-4' : 'pt-1 pb-1 -mt-30'
+            "flex gap-10 text-gray-200 transition-all duration-300",
+            isAtTop ? 'p-4 -mt-5' : 'pt-1 pb-1 -mt-30'
           )}>
-            <li className='flex justify-center items-center'>
-              <a href="#about" className='flex items-center flex-col gap-1 
-              group/icons relative transition-all
-              duration-200 group-hover/header:scale-115 group-hover/header:opacity-100'>
-                <House className={clsx(
-                  'cursor-crosshair hover:scale-125 size-8 hover:text-white',
-                  'transition-transform',
-                  isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
-                  'group-hover/header:opacity-100 ',
-                )}
-                />
-                <span className='opacity-0 pointer-events-none 
-               group-hover/icons:text-white group-hover/icons:opacity-100 transition-opacity duration-200 absolute mt-9 '>Home</span>
-              </a></li >
-            <li className='flex justify-center items-center group relative'>
-              <a href="#projects" className='flex items-center flex-col gap-1 
-              group/icons relative transition-all
-              duration-200 group-hover/header:scale-115 group-hover/header:opacity-100'>
-                <BriefcaseBusiness className={clsx(
-                  'cursor-crosshair hover:scale-125 size-8 hover:text-white',
-                  'transition-transform',
-                  isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
-                  'group-hover/header:opacity-100',
-                )}
-                />
-                <span className='opacity-0 pointer-events-none 
-               group-hover/icons:text-white group-hover/icons:opacity-100 transition-opacity duration-200 absolute mt-9 '>Projects</span>
-              </a>
-            </li>
-            <li className='flex justify-center items-center group relative'>
-              <a href="#contact" className='flex items-center flex-col gap-1 
-              group/icons relative transition-all
-              duration-200 group-hover/header:scale-115 group-hover/header:opacity-100'>
-                <Contact className={clsx(
-                  'cursor-crosshair hover:scale-125 size-8 hover:text-white',
-                  'transition-transform',
-                  isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
-                  'group-hover/header:opacity-100',
-                )}
-                />
-                <span className='opacity-0 pointer-events-none 
-               group-hover/icons:text-white group-hover/icons:opacity-100 transition-opacity duration-200 absolute mt-9 '>Contact</span>
-              </a>
-            </li>
+            {navItems.map(({ label, href, icon: Icon }) => (
+              <li key={label} className='flex justify-center items-center group/icon relative'>
+                <a href={href} className='flex items-center flex-col  
+              group/icons relative transition-all 
+              duration-200  group-hover/header:opacity-100'>
+                  <GlitchIconWrapper icon={Icon} className={clsx("cursor-crosshair z-3 group-hover/header:scale-125",
+
+                    isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
+                    'group-hover/header:opacity-100',
+                  )}
+                  />
+                  <span className='opacity-0 pointer-events-none 
+               group-hover/icons:text-white group-hover/icons:opacity-100 transition-opacity duration-200 absolute mt-10 '>{label}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
       </header>
       <div className={clsx("transition-all h-25 duration-500 bg-gray-200")}></div>
-      
+
     </div>
   )
 }

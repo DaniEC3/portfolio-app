@@ -1,8 +1,8 @@
 import Image from "next/image";
 import ScrollAnimation from "@/animations/ScrollAnimation";
 import clsx from "clsx";
-import TypewriterClient from "./TypewriterClient";
-import { AnimatedBackground } from "./AnimatedBackground";
+import TypewriterClient from "./Styles/TypewriterClient";
+import { AnimatedBackground } from "./Styles/AnimatedBackground";
 
 export default function HeroComponent() {
   return (
