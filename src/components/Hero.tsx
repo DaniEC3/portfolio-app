@@ -2,15 +2,16 @@ import Image from "next/image";
 import ScrollAnimation from "@/animations/ScrollAnimation";
 import clsx from "clsx";
 import TypewriterClient from "./TypewriterClient";
+import { AnimatedBackground } from "./AnimatedBackground";
 
 export default function HeroComponent() {
   return (
-    <div className="bg-gray-200 ">
+    <div className=" relative">
+      <AnimatedBackground />
 
       <section className={clsx("flex flex-col xl:flex-row xl:gap-24 justify-center items-center text-center",
         "h-screen xl:pr-12 transition-all duration-500  mt-30 xl:mt-0 "
       )}>
-        
         <div className="flex flex-col p-4">
           <ScrollAnimation>
             <h1 className={clsx("text-gray-950  text-4xl sm:text-5xl font-bold mb-4",
