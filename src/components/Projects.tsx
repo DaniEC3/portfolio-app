@@ -16,6 +16,7 @@ interface Repo {
 
 export default function ProjectsComponent() {
   const [projects, setProjects] = useState<Repo[]>([]);
+  const [isLeft, setLeft] = useState<boolean>(false);
   const [featuredProject, setFeaturedProject] = useState<Repo[]>([]);
   const images: { [key: string]: string } = {
     '5': '/ProjectsSS/MyFlixAngular.png',
@@ -55,18 +56,17 @@ export default function ProjectsComponent() {
         <div className="text-2xl font-semibold mb-6">Featured Projects!!</div>
         {featuredProject.map((project: Repo, index) => (
           <ScrollAnimation delay={index * 0.5} key={project.id}>
-            <div className="flex flex-col sm:flex-row items-center
-          p-6 mb-6
-          w-full">
+            <div className="flex flex-col sm:flex-row 
+          p-6 mb-6 w-full">
               <div className='w-full'>
                 <Image
                   src={project.imageUrl || '/images/default.png'}
                   alt={project.name}
                   width={500}
                   height={500}
-                  className="rounded-lg"></Image>
+                  className=""></Image>
               </div>
-              <div className="flex flex-col justify-between h-60 w-full max-w-md p-6 ml-5 bg-white dark:bg-gray-800 rounded-xl shadow-lg transition-transform hover:scale-105 hover:shadow-xl duration-300">
+              <div className="flex flex-col justify-between h-60 w-full max-w-md p-6 ml-5">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2 text-center">
                   {project.name}
                 </h2>

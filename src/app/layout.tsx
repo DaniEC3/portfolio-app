@@ -3,16 +3,19 @@ import { Space_Grotesk } from "next/font/google";
 import { Great_Vibes } from "next/font/google";
 import "./globals.css";
 
+
 const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-});
-const greatVibes = Great_Vibes({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-great-vibes",
+  variable: '--font-space-grotesk',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
+const greatVibes = Great_Vibes({
+  variable: '--font-great-vibes',
+  subsets: ['latin'],
+    weight: "400",
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Portfolio",

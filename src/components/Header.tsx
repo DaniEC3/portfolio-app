@@ -16,7 +16,7 @@ export default function HeaderComponent() {
       const scrollY = window.scrollY;
       const atTop = scrollY < 10;
       setIsAtTop(atTop);
-      console.log('Scroll position:', scrollY, 'Is at top:', atTop); // Debugging line
+      // console.log('Scroll position:', scrollY, 'Is at top:', atTop); // Debugging line
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -58,7 +58,7 @@ export default function HeaderComponent() {
 
         <nav className='flex justify-center'>
           <ul className={clsx(
-            "flex gap-6 text-gray-400 transition-all duration-300 ",
+            "flex gap-6 text-gray-200 transition-all duration-300 ",
             isAtTop ? 'p-4' : 'pt-1 pb-1 -mt-30'
           )}>
             <li className='flex justify-center items-center'>
@@ -68,7 +68,7 @@ export default function HeaderComponent() {
                 <House className={clsx(
                   'cursor-crosshair hover:scale-125 size-8 hover:text-white',
                   'transition-transform',
-                  isAtTop ? 'group-hover/header:text-gray-400' : 'group-hover/header:text-gray-100',
+                  isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
                   'group-hover/header:opacity-100 ',
                 )}
                 />
@@ -82,7 +82,7 @@ export default function HeaderComponent() {
                 <BriefcaseBusiness className={clsx(
                   'cursor-crosshair hover:scale-125 size-8 hover:text-white',
                   'transition-transform',
-                  isAtTop ? 'group-hover/header:text-gray-400' : 'group-hover/header:text-gray-100',
+                  isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
                   'group-hover/header:opacity-100',
                 )}
                 />
@@ -97,7 +97,7 @@ export default function HeaderComponent() {
                 <Contact className={clsx(
                   'cursor-crosshair hover:scale-125 size-8 hover:text-white',
                   'transition-transform',
-                  isAtTop ? 'group-hover/header:text-gray-400' : 'group-hover/header:text-gray-100',
+                  isAtTop ? 'group-hover/header:text-gray-200' : 'group-hover/header:text-gray-100',
                   'group-hover/header:opacity-100',
                 )}
                 />

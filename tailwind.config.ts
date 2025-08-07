@@ -15,7 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'sans-serif'],
-        script: ['var(--font-great-vibes)', 'cursive'],
+        cursive: ['var(--font-great-vibes)', 'cursive'],
       },
       colors: {
         primary: 'rgb(var(--primary-color) / <alpha-value>)',
