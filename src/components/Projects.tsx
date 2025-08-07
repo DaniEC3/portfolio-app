@@ -23,6 +23,9 @@ export default function ProjectsComponent() {
     '6': '/ProjectsSS/MyFlixReact.png',
     '11': '/ProjectsSS/TacosElPuebla.png',
   };
+  // const colors: string = {
+  //   angular: 
+  // }
 
 
   useEffect(() => {
@@ -56,31 +59,35 @@ export default function ProjectsComponent() {
         <div className="text-2xl font-semibold mb-6">Featured Projects!!</div>
         {featuredProject.map((project: Repo, index) => (
           <ScrollAnimation delay={index * 0.5} key={project.id}>
-            <div className="flex flex-col sm:flex-row 
-          p-6 mb-6 w-full">
-              <div className='w-full'>
-                <Image
-                  src={project.imageUrl || '/images/default.png'}
-                  alt={project.name}
-                  width={500}
-                  height={500}
-                  className=""></Image>
-              </div>
-              <div className="flex flex-col justify-between h-60 w-full max-w-md p-6 ml-5">
-                <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2 text-center">
-                  {project.name}
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-center">
-                  {project.description || 'No description available'}
-                </p>
-                <a
-                  href={project.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline text-center"
-                >
-                  🔗 View on GitHub
-                </a>
+            <div className='relative'>
+              <div className="absolute  bg-[url('/ProjectLogos/myflixangular.png')]
+              bg-cover w-full h-full bg-center opacity-70 top-25 left-10 "></div>
+              <div className="flex flex-col sm:flex-row relative
+          p-6 mb-6 w-full bg-gray-700/50 rounded-2xl border-2 border-gray-800">
+                <div className='w-full '>
+                  <Image
+                    src={project.imageUrl || '/images/default.png'}
+                    alt={project.name}
+                    width={500}
+                    height={500}
+                    className="mask-linear-130 mask-linear-from-55% mask-linear-to-80%"></Image>
+                </div>
+                <div className="flex flex-col justify-between h-60 w-full max-w-md p-6 ml-5">
+                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2 text-center">
+                    {project.name}
+                  </h2>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-center">
+                    {project.description || 'No description available'}
+                  </p>
+                  <a
+                    href={project.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline text-center"
+                  >
+                    🔗 View on GitHub
+                  </a>
+                </div>
               </div>
             </div>
           </ScrollAnimation>
