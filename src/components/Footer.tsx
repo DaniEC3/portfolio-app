@@ -26,7 +26,8 @@ export default function Footer() {
   return (
     <footer
       className={clsx(
-        'fixed bottom-0 w-full transition-all duration-300 overflow-hidden bg-gradient-to-b  text-white shadow-lg',
+        'fixed bottom-0 w-full transition-all duration-300 overflow-hidden bg-gradient-to-b',
+        'text-white shadow-lg opacity-50 ',
         isAtBottom ? 'h-56 from-gray-200 from-5% via-gray-700 to-gray-800' : 'h-32 from-gray-200 via-gray-600 to-gray-800'
       )}
     >
