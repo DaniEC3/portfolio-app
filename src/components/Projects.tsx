@@ -12,6 +12,7 @@ interface Repo {
   html_url: string;
   description: string;
   imageUrl?: string;
+
 }
 
 export default function ProjectsComponent() {
@@ -22,6 +23,11 @@ export default function ProjectsComponent() {
     '5': '/ProjectsSS/MyFlixAngular.png',
     '6': '/ProjectsSS/MyFlixReact.png',
     '11': '/ProjectsSS/TacosElPuebla.png',
+  };
+  const logos: Record<number, string> = {
+    0: '/ProjectLogos/MyFlix1.png',
+    1: '/ProjectLogos/MyFlix2.png',
+    2: '/ProjectLogos/myFlix3.png',
   };
   // const colors: string = {
   //   angular: 
@@ -46,6 +52,7 @@ export default function ProjectsComponent() {
       const feature = index.map(i => ({
         ...projects[i],
         imageUrl: images[i] || '/images/default.png', // fallback image
+
       }));
       setFeaturedProject(feature);
     }
@@ -54,14 +61,16 @@ export default function ProjectsComponent() {
   return (
     <div className='relative'>
       <AnimatedBackground />
-      <section className="bg-gray-200 flex flex-col items-center justify-center p-8 text-gray-900">
+      <section className="bg-gray-900 flex flex-col items-center justify-center p-8 text-gray-900">
 
         <div className="text-2xl font-semibold mb-6">Featured Projects!!</div>
         {featuredProject.map((project: Repo, index) => (
           <ScrollAnimation delay={index * 0.5} key={project.id}>
             <div className='relative'>
-              <div className="absolute  bg-[url('/ProjectLogos/myflixangular.png')]
-              bg-cover w-full h-full bg-center opacity-70 top-25 left-10 "></div>
+              <div
+                className="absolute bg-cover w-full h-full bg-center opacity-70 top-25 left-10"
+                style={{ backgroundImage: `url(${logos[index] ?? '/images/default.png'})` }}
+              ></div>
               <div className="flex flex-col sm:flex-row relative
           p-6 mb-6 w-full bg-gray-700/50 rounded-2xl border-2 border-gray-800">
                 <div className='w-full '>
