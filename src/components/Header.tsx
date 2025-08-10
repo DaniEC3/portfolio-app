@@ -48,7 +48,7 @@ export default function HeaderComponent() {
         'w-full z-50 transition-all duration-500 fixed top-0 left-0',
         'from-gray-800 from-16% via-gray-700  to-gray-200 group/header',
         'mask-b-from-80% mask-b-to-100%',
-        isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
+        isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s hover:h-65' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
 
 
       )}>
@@ -69,7 +69,7 @@ export default function HeaderComponent() {
             className={clsx(
               'object-cover',
               'transition-all duration-300',
-              isAtTop ? 'h-25 opacity-100' : 'h-50 opacity-0',
+              isAtTop ? 'h-25 opacity-100 cursor-crosshair' : 'h-50 opacity-0',
               'hover:animate-glitch'
             )}
             alt='Logo'
