@@ -35,7 +35,7 @@ export default function ProjectsComponent() {
       image: '/ProjectsSS/MyFlixAngular.png',
       hueA: 340,
       hueB: 10,
-      logo: '/ProjectLogos/MyFlix1.png',
+      logo: '/ProjectLogos/MyFlixW.png',
       title: 'MyFlix Angular',
     },
     {
@@ -84,25 +84,30 @@ export default function ProjectsComponent() {
 
         <div className="text-2xl font-semibold mb-6">Featured Projects!!</div>
         <div className="mx-auto my-[100px] w-full max-w-[500px] pb-[100px]">
-          {/* Div before iteration in frame Motion Docs
-          // <div className="mx-auto my-[100px] w-full max-w-[500px] pb-[100px]">
-          //   ))}
-          // </div>
-          */}
           {cardProject.map((card, i) => (
             <ScrollAnimation delay={i * 0.5} key={card.title}>
               <Card i={i} img={card.image} hueA={card.hueA} hueB={card.hueB} key={card.image}
-              ><div>
-                  {/* {featuredProject.} */}
+              >
+                <div className='flex flex-col w-full justify-center items-center'>
+                  <div className='w-full absolute opacity-50'>
+                    <Image
+                      src={card.logo}
+                      width={400}
+                      height={400}
+                      alt={card.title}
+                      className='mt-10'>
+                    </Image>
+                  </div>
                   <Image
                     src={card.image}
                     width={200}
                     height={200}
                     alt={card.title}>
-
                   </Image>
-                  <div>
-                    {featuredProject[i]?.name}
+                  <div className='w-full flex justify-center items-center h-full'>
+                    <div className='text-base'>
+                      {featuredProject[i]?.name ?? card.title}
+                    </div>
                   </div>
                 </div>
               </Card>

@@ -44,10 +44,12 @@ export default function HeaderComponent() {
   return (
     <div>
       <header className={clsx(
-        ' text-gray-800 bg-gradient-to-b flex flex-col items-center gap-4',
-        ' w-full z-50 transition-all duration-500 fixed top-0 left-0',
+        'text-gray-800 bg-gradient-to-b flex flex-col items-center gap-4',
+        'w-full z-50 transition-all duration-500 fixed top-0 left-0',
         'from-gray-800 from-16% via-gray-700  to-gray-200 group/header',
-        isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90',
+        'mask-b-from-80% mask-b-to-100%',
+        isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
+
 
       )}>
         <div className='w-full justify-end'>

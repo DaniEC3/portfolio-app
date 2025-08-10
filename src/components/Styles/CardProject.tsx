@@ -28,7 +28,7 @@ export default function Card({ hueA, hueB, i, children }: CardProps) {
 
   return (
     <motion.div
-      className={`relative overflow-hidden flex justify-center items-center pt-5 -mb-[120px] card-container-${i}`}
+      className={`relative overflow-hidden flex justify-center items-center pt-5 -mb-[50px] card-container-${i}`}
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ amount: 0.8 }}
@@ -46,7 +46,7 @@ export default function Card({ hueA, hueB, i, children }: CardProps) {
                    [box-shadow:0_0_1px_hsl(0_0%_0%_/_0.075),0_0_2px_hsl(0_0%_0%_/_0.075),0_0_4px_hsl(0_0%_0%_/_0.075),0_0_8px_hsl(0_0%_0%_/_0.075),0_0_16px_hsl(0_0%_0%_/_0.075)]"
       >
         
-        <div className="">
+        <div className="w-full flex items-center justify-center">
           {children}
         </div>
       </motion.div>
