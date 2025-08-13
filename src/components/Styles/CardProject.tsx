@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import type { Variants } from 'motion/react';
+import { AnimatedBackgroundCard } from "./AnimatedBackgroundCard";
 
 
 interface CardProps {
@@ -45,7 +46,7 @@ export default function Card({ hueA, hueB, i, children }: CardProps) {
                    [transform-origin:10%_60%] border-4 border-gray-700
                    [box-shadow:0_0_1px_hsl(0_0%_0%_/_0.075),0_0_2px_hsl(0_0%_0%_/_0.075),0_0_4px_hsl(0_0%_0%_/_0.075),0_0_8px_hsl(0_0%_0%_/_0.075),0_0_16px_hsl(0_0%_0%_/_0.075)]"
       >
-        
+        <AnimatedBackgroundCard></AnimatedBackgroundCard>    
         <div className="w-full flex items-center justify-center">
           {children}
         </div>
