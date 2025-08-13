@@ -22,9 +22,9 @@ export default function Card({ hueA, hueB, i, children }: CardProps) {
     },
   };
 
-  const hue = (h: number) => `hsl(${h}, 100%, 50%)`;
+  const hue = (h: number) => `hsl(${h}, 60%, 60%)`;
 
-  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
+  const background = `linear-gradient(306deg, ${hue(hueA)}, black)`;
 
   return (
     <motion.div
@@ -41,8 +41,8 @@ export default function Card({ hueA, hueB, i, children }: CardProps) {
 
       <motion.div
         variants={cardVariants}
-        className="card flex flex-col items-center justify-center w-[300px] h-[430px] rounded-[20px] bg-neutral-100 text-[164px]
-                   [transform-origin:10%_60%]
+        className="card flex flex-col items-center justify-center w-[300px] h-[430px] rounded-[20px] bg-gray-100 text-[164px]
+                   [transform-origin:10%_60%] border-4 border-gray-700
                    [box-shadow:0_0_1px_hsl(0_0%_0%_/_0.075),0_0_2px_hsl(0_0%_0%_/_0.075),0_0_4px_hsl(0_0%_0%_/_0.075),0_0_8px_hsl(0_0%_0%_/_0.075),0_0_16px_hsl(0_0%_0%_/_0.075)]"
       >
         

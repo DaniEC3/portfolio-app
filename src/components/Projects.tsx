@@ -33,23 +33,23 @@ export default function ProjectsComponent() {
   const cardProject: CardProject[] = [
     {
       image: '/ProjectsSS/MyFlixAngular.png',
-      hueA: 340,
-      hueB: 10,
-      logo: '/ProjectLogos/MyFlixW.png',
+      hueA: 555,
+      hueB: 9000,
+      logo: '/ProjectLogos/MyFlix4.png',
       title: 'MyFlix Angular',
     },
     {
       image: '/ProjectsSS/MyFlixReact.png',
-      hueA: 205,
+      hueA: 455,
       hueB: 40,
       logo: '/ProjectLogos/MyFlix1.png',
       title: 'MyFlix React'
     },
     {
       image: '/ProjectsSS/TacosElPuebla.png',
-      hueA: 60,
+      hueA: 580,
       hueB: 90,
-      logo: '/ProjectLogos/myFlix3.png',
+      logo: '/ProjectLogos/MyFlix4.png',
       title: 'Tacos El Puebla'
     }
   ];
@@ -68,7 +68,8 @@ export default function ProjectsComponent() {
 
   useEffect(() => {
     if (projects.length > 0) {
-      const index = [5, 6, 11]
+      const index = [5, 6, 12]
+      // console.log(projects)
       const feature = index.map(i => ({
         ...projects[i]
 
@@ -89,78 +90,53 @@ export default function ProjectsComponent() {
               <Card i={i} img={card.image} hueA={card.hueA} hueB={card.hueB} key={card.image}
               >
                 <div className='flex flex-col w-full justify-center items-center'>
-                  <div className='w-full absolute opacity-50'>
+                  {/* <div className='w-full absolute opacity-50 pointer-events-none'>
                     <Image
                       src={card.logo}
                       width={400}
                       height={400}
                       alt={card.title}
-                      className='mt-10'>
+                      className=''>
                     </Image>
-                  </div>
-                  <Image
+                  </div> */}
+                  {/* <Image
                     src={card.image}
                     width={200}
                     height={200}
                     alt={card.title}>
-                  </Image>
-                  <div className='w-full flex justify-center items-center h-full'>
-                    <div className='text-base'>
+                  </Image> */}
+                  <div className='w-full flex flex-col justify-center items-center h-full'>
+                    <div className='text-3xl p-4 text-shadow-md'>
                       {featuredProject[i]?.name ?? card.title}
                     </div>
+                    <div className=' flex text-center text-xl text-shadow-xs py-1 px-4 w-full line-clamp-5 overflow-hidden'>
+                      {featuredProject[i]?.description}
+                    </div>
+                    <a
+                      href={featuredProject[i]?.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm p-4 font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center
+                      hover:cursor-pointer"
+                    >
+                      🔗 View on GitHub
+                    </a>
+                    <a
+                      href={featuredProject[i]?.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm  font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center
+                      hover:cursor-pointer"
+                    >
+                      🔗 Live demo
+                    </a>
+                   
                   </div>
                 </div>
               </Card>
             </ScrollAnimation>
           ))}
         </div>
-        {/* {featuredProject.map((project: Repo, index) => (
-          
-          
-            <div className="flex flex-col sm:flex-row  relative justify-center
-              p-6 mb-6 md:w-3xl xl:w-4xl w-full bg-gray-700/50 rounded-2xl border-2 border-gray-800">
-              <div className=''>
-                <Image
-                  src={project.imageUrl || '/images/default.png'}
-                  alt={project.name}
-                  width={500}
-                  height={500}
-                  className="mask-linear-130 mask-linear-from-55% mask-linear-to-80%"></Image>
-              </div>
-              <div className="relative flex flex-col justify-between h-60 w-full max-w-md p-6 ml-5">
-                <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2 text-center">
-                  {project.name}
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-center">
-                  {project.description || 'No description available'}
-                </p>
-                <a
-                  href={project.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline text-center"
-                >
-                  🔗 View on GitHub
-                </a>
-                <div
-                  className="absolute opacity-30 h-full w-full flex justify-center 
-                     top-16"
-                >
-                  <Image
-                    src={logos[index]}
-                    alt={project.name}
-                    width={200}
-                    height={200}
-                    className=' '
-                  >
-
-                  </Image>
-                </div>
-              </div>
-            </div>
-
-
-        ))} */}
       </section>
     </div>
   )
