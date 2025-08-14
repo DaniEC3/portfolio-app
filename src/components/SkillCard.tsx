@@ -20,11 +20,17 @@ export default function SkillCard( {frontend,backend,soft, selectedTab}: SkillCa
           {S}
         </div>
       ))}
-      {/* {backend?.map((S:string) => (
+      {selectedTab.label === 'Back-End' && backend?.map((S:string) => (
         <div key={S} className="skill-item">
           {S}
         </div>
-      ))} */}
+      ))}
+      {selectedTab.label === 'Soft-Skills' && soft?.map((S:string) => (
+        <div key={S} className="skill-item">
+          {S}
+        </div>
+      ))}
+      
 
     </div>
   )
