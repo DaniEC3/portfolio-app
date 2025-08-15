@@ -20,6 +20,9 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
   // console.log("Rendering SkillCard with props:", selectedTab.label);
   return (
     <div className="flex flex-wrap w-full h-full gap-4 p-5 justify-center">
+      <div className="w-full h-full rounded-lg bg-gray-600 overflow-hidden shadow-xl flex flex-col">
+        
+      </div>
       {selectedTab.label === 'Front-End' && frontend?.map((S: Skill) => (
         <motion.div
           key={S.name}
@@ -36,7 +39,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
         </motion.div>
 
       ))}
-      {selectedTab.label === 'Back-End' && backend?.map((S: Skill) => (
+      {/* {selectedTab.label === 'Back-End' && backend?.map((S: Skill) => (
         <motion.div
           key={S.name}
           className="skill-item w-1/3 md:w-[30%] p-4 m-2 bg-gray-100 rounded-lg shadow-md hover:cursor-pointer
@@ -65,7 +68,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
         >
           {S.name}
         </motion.div>
-      ))}
+      ))} */}
 
 
     </div>

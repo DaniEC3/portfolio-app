@@ -7,6 +7,7 @@ import * as motion from 'motion/react-client'
 import ScrollAnimation from '@/animations/ScrollAnimation'
 import { Brain, Code2, LucideIcon, ServerCog } from 'lucide-react'
 import SkillCard from './SkillCard'
+import { AnimatedBackground } from './Styles/AnimatedBackground'
 
 type Skill = {
   name: string;
@@ -68,6 +69,7 @@ export default function SkillsComponent() {
 
   return (
     <div className='w-screen h-screen flex flex-col items-center justify-center gap-6 px-10'>
+      <AnimatedBackground />
       <ScrollAnimation>
         <div className='font-bold text-3xl w-full text-center p-4 mb-5'>My skills</div>
         <div className="w-full h-full rounded-lg bg-gray-600 overflow-hidden shadow-xl flex flex-col">

@@ -4,7 +4,7 @@ import { motion } from 'motion/react'
 
 export function AnimatedBackgroundCard() {
   return (
-    <div className="absolute inset-0 overflow-hidden rounded-lg">
+    <div className="absolute inset-0 overflow-hidden rounded-lg ">
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 400 300"
