@@ -1,5 +1,5 @@
 import HeaderComponent from '@/components/Header';
-import FooterComponent from "@/components/Footer";
+import FooterComponent from "@/components/Footer/Footer";
 import ProjectsComponent from "@/components/Projects";
 import AboutComponent from "@/components/About";
 import HeroComponent from "@/components/Hero";
