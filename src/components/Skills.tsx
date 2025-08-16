@@ -14,7 +14,7 @@ type Skill = {
   color: string; // Tailwind class or custom CSS class
 };
 
-type Tab = { icon:LucideIcon ; label: string }
+type Tab = { icon: LucideIcon; label: string }
 
 const frontend: Skill[] = [
   { name: "HTML", color: "#E34F26" },      // orange-red
@@ -68,36 +68,22 @@ export default function SkillsComponent() {
   const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0])
 
   return (
-    <div className='w-screen h-screen flex flex-col items-center justify-center gap-6 px-10'>
-      <AnimatedBackground />
-      <ScrollAnimation>
-        <div className='font-bold text-3xl w-full text-center p-4 mb-5'>My skills</div>
-        <div className="w-full h-full rounded-lg bg-gray-600 overflow-hidden shadow-xl flex flex-col">
-          <nav className="bg-gray-400  rounded-t-lg border-b ">
-            <ul className="flex w-full list-none p-0 m-0 font-medium text-sm">
-              {tabs.map((item) => (
-                <motion.li
-                  key={item.label}
-                  initial={false}
-                  animate={{
-                    backgroundColor: item === selectedTab ? '#eee' : '#eee0',
-                  }}
-                  className="relative rounded-t-md w-full px-4 py-2.5 cursor-pointer flex  items-center flex-1 min-w-0 select-none text-[#0f1115] bg-white"
-                  onClick={() => setSelectedTab(item)}
-                >
-                  <item.icon className="w-4 h-4 mr-2" />
-                  {`$ ${item.label}`}
-                  {item === selectedTab ? (
-                    <motion.div
-                      layoutId="underline"
-                      id="underline"
-                      className="absolute -bottom-[2px] left-0 right-0 h-[2px] bg-[--accent]"
-                    />
-                  ) : null}
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
+    <div className='realtive w-screen h-screen flex flex-col items-center justify-center gap-6 px-10'>
+      <div className='font-bold text-3xl text-center p-4 mb-5'>My skills</div>
+      <div className="container relative rounded-lg bg-red overflow-hidden shadow-xl flex flex-col
+        flex-wrap gap-4">
+        <div className="flex flex-col w-1/3 bg-gray-200">
+          <div className="flex bg-gray-200 ">
+            <motion.div
+
+              initial={false}
+
+              className="rounded-t-md w-full px-4 py-2.5 cursor-pointer flex  items-center bg-gray-200 border-2"
+              onClick={() => setSelectedTab(skillsTable[0])}
+            > Front end
+            </motion.div>
+          </div>
+
           <main className="w-full h-full flex-1 flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -108,17 +94,83 @@ export default function SkillsComponent() {
                 transition={{ duration: 0.2 }}
                 className="w-full h-full flex items-center justify-center"
               >
-                <SkillCard 
-                frontend={frontend}
-                backend={backend}
-                soft={soft}
-                selectedTab={selectedTab}
-                 />
+                <SkillCard
+                  frontend={frontend}
+                  backend={backend}
+                  soft={soft}
+                  selectedTab={selectedTab}
+                />
               </motion.div>
             </AnimatePresence>
           </main>
         </div>
-      </ScrollAnimation>
-    </div>
+
+        <div className="flex flex-col w-[30%] bg-gray-200">
+          <div className="flex bg-gray-200 ">
+            <motion.div
+
+              initial={false}
+
+              className="rounded-t-md w-full px-4 py-2.5 cursor-pointer flex  items-center bg-gray-200 border-2"
+              onClick={() => setSelectedTab(skillsTable[0])}
+            > Back End
+            </motion.div>
+          </div>
+
+          <main className="w-full h-full flex-1 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedTab ? selectedTab.label : 'empty'}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <SkillCard
+                  frontend={frontend}
+                  backend={backend}
+                  soft={soft}
+                  selectedTab={selectedTab}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </div>
+        <div className="flex flex-col w-1/3 bg-gray-200">
+          <div className="flex bg-gray-200 ">
+            <motion.div
+
+              initial={false}
+
+              className="rounded-t-md w-full px-4 py-2.5 cursor-pointer flex  items-center bg-gray-200 border-2"
+              onClick={() => setSelectedTab(skillsTable[0])}
+            > Front end
+            </motion.div>
+          </div>
+
+          <main className="w-full h-full flex-1 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedTab ? selectedTab.label : 'empty'}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <SkillCard
+                  frontend={frontend}
+                  backend={backend}
+                  soft={soft}
+                  selectedTab={selectedTab}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </div>
+      </div>
+
+    </div >
   )
 }
