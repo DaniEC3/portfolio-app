@@ -59,6 +59,7 @@ export default function ProjectsComponent() {
       try {
         const data = await fetchGitHubProjects();
         setProjects(data);
+        console.log('Fetched projects:', data);
       } catch (error) {
         console.error('Error fetching projects:', error);
       }
