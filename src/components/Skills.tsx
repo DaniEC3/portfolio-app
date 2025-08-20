@@ -63,7 +63,8 @@ export default function SkillsComponent() {
   const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0])
 
   return (
-    <div className='relative w-screen h-full md:h-screen flex flex-col items-center justify-center gap-5 px-10'>
+    <div className='relative w-screen h-full md:h-screen flex flex-col items-center justify-center gap-5 px-10
+    mb-60'>
       <div className='font-bold text-3xl text-center p-4 mb-5'>My skills</div>
 
       <div className="relative w-full h-full md:h-screen">
