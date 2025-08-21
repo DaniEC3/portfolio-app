@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import ValidationModal from './ValidationModal';
 
 // Firebase configuration - Replace with your Firebase config
 const firebaseConfig = {
@@ -46,6 +47,8 @@ export default function Footer() {
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [showValidationModal, setShowValidationModal] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -78,9 +81,35 @@ export default function Footer() {
     });
   };
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+    
+    if (!formData.name || formData.name.trim().length < 2) {
+      errors.push('Name must be at least 2 characters long');
+    }
+    
+    if (!formData.email || !validateEmail(formData.email)) {
+      errors.push('Please enter a valid email address');
+    }
+    
+    if (!formData.message || formData.message.trim().length < 10) {
+      errors.push('Message must be at least 10 characters long');
+    }
+    
+    return { isValid: errors.length === 0, errors };
+  };
+
   const handleSubmit = async (): Promise<void> => {
-    if (!formData.name || !formData.email || !formData.message) {
-      setSubmitStatus('error');
+    const validation = validateForm();
+    console.log(validation.errors);
+    if (!validation.isValid) {
+      setValidationErrors(validation.errors);
+      setShowValidationModal(true);
       return;
     }
 
@@ -143,28 +172,7 @@ export default function Footer() {
                 <ArrowDown className="w-4 h-4" />
               </motion.button>
               
-              <motion.div 
-                className="flex space-x-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                {socialLinks.map((social: SocialLink, index: number) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 text-gray-400 hover:text-white transition-colors duration-300"
-                    whileHover={{ scale: 1.2, y: -2 }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </motion.a>
-                ))}
-              </motion.div>
+              {/* Social links are hidden when not at bottom - only show "Let's Connect" button */}
             </motion.div>
           ) : (
             <motion.div
@@ -193,10 +201,11 @@ export default function Footer() {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Your Name"
+                    placeholder="Your Name (min. 2 characters)"
                     value={formData.name}
                     onChange={handleInputChange}
                     required
+                    minLength={2}
                     className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   />
                 </motion.div>
@@ -209,7 +218,7 @@ export default function Footer() {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Your Email"
+                    placeholder="Your Email (e.g., user@example.com)"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
@@ -224,10 +233,11 @@ export default function Footer() {
                 >
                   <textarea
                     name="message"
-                    placeholder="Your Message"
+                    placeholder="Your Message (min. 10 characters)"
                     value={formData.message}
                     onChange={handleInputChange}
                     required
+                    minLength={10}
                     rows={3}
                     className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
                   />
@@ -314,6 +324,13 @@ export default function Footer() {
           )}
         </AnimatePresence>
       </div>
+      
+      {/* Validation Modal */}
+      <ValidationModal
+        isOpen={showValidationModal}
+        onClose={() => setShowValidationModal(false)}
+        errors={validationErrors}
+      />
     </footer>
   );
 }
