@@ -1,8 +1,7 @@
 'use client';
-import { BriefcaseBusiness, Contact, House } from 'lucide-react';
+import { BriefcaseBusiness, BrainCircuit, House } from 'lucide-react';
 import Image from 'next/image';
 import clsx from 'clsx';
-
 import { useEffect, useState } from 'react';
 
 import ThemeToggleComponent from './ThemeToggle';
@@ -23,11 +22,22 @@ export default function HeaderComponent() {
       icon: BriefcaseBusiness,
     },
     {
-      label: 'Contact',
-      href: '#contact',
-      icon: Contact,
+      label: 'Skills',
+      href: '#skills',
+      icon: BrainCircuit,
     },
   ];
+
+  const scrollToSection = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const targetId = event.currentTarget.getAttribute('href');
+    if (targetId) {
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,8 +92,10 @@ export default function HeaderComponent() {
             isAtTop ? 'p-4 -mt-5' : 'pt-1 pb-1 -mt-30'
           )}>
             {navItems.map(({ label, href, icon: Icon }) => (
+
               <li key={label} className='flex justify-center items-center group/icon relative'>
-                <a href={href} className='flex items-center flex-col  
+
+                <a href={href} onClick={scrollToSection} className='flex items-center flex-col  
               group/icons relative transition-all 
               duration-200  group-hover/header:opacity-100'>
                   <GlitchIconWrapper icon={Icon} className={clsx("cursor-crosshair z-3 group-hover/header:scale-125",
@@ -95,6 +107,7 @@ export default function HeaderComponent() {
                   <span className='opacity-0 pointer-events-none 
                group-hover/icons:text-white group-hover/icons:opacity-100 transition-opacity duration-200 absolute mt-10 '>{label}</span>
                 </a>
+
               </li>
             ))}
           </ul>

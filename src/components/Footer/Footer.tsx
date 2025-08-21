@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Github, Linkedin, Twitter, Mail, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { initializeApp } from 'firebase/app';
@@ -54,7 +54,7 @@ export default function Footer() {
     const handleScroll = (): void => {
       const scrollPosition = window.innerHeight + window.scrollY;
       const threshold = document.body.offsetHeight - 120;
-      console.log('Scroll Position:', scrollPosition, 'Threshold:', threshold);
+      // console.log('Scroll Position:', scrollPosition, 'Threshold:', threshold);
 
       if (scrollPosition >= threshold) {
         setIsAtBottom(true);
@@ -146,7 +146,7 @@ export default function Footer() {
       className={clsx(
         'fixed bottom-0 w-full transition-all duration-500 ease-out overflow-hidden',
         'bg-gradient-to-t from-slate-900 via-slate-800 to-transparent',
-        'backdrop-blur-sm border-t border-white/10',
+        'backdrop-blur-sm border-t border-white/10 z-10',
         isAtBottom ? 'h-96' : 'h-24'
       )}
     >
