@@ -1,13 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { fetchGitHubProjects } from '@/app/lib/github';
 
 import ScrollAnimation from '@/animations/ScrollAnimation';
 import { AnimatedBackground } from './Styles/AnimatedBackground';
 
-import Image from 'next/image';
-
 import Card from './Styles/CardProject';
+
+import { getFeaturedProject } from './ProjectData';
 
 interface Repo {
   id: number;
@@ -24,60 +23,45 @@ interface CardProject {
   hueA: number;
   hueB: number;
   logo: string;
-  title: string;
 }
 
 export default function ProjectsComponent() {
-  const [projects, setProjects] = useState<Repo[]>([]);
   const [featuredProject, setFeaturedProject] = useState<Repo[]>([]);
-  const cardProject: CardProject[] = [
+  const extraInfo: ExtraInfo[] = [
     {
       image: '/ProjectsSS/MyFlixAngular.png',
       hueA: 555,
       hueB: 9000,
       logo: '/ProjectLogos/MyFlix4.png',
-      title: 'MyFlix Angular',
     },
     {
       image: '/ProjectsSS/MyFlixReact.png',
       hueA: 455,
       hueB: 40,
       logo: '/ProjectLogos/MyFlix1.png',
-      title: 'MyFlix React'
     },
     {
       image: '/ProjectsSS/TacosElPuebla.png',
       hueA: 580,
       hueB: 90,
       logo: '/ProjectLogos/MyFlix4.png',
-      title: 'Tacos El Puebla'
+
     }
   ];
 
   useEffect(() => {
-    const getProjects = async () => {
-      try {
-        const data = await fetchGitHubProjects();
-        setProjects(data);
-        // console.log('Fetched projects:', data);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-      }
-    }
-    getProjects();
+    getFeaturedProject().then((data) => {
+      data.forEach((project, index) => {
+        // Assign imageUrl, hueA, and hueB from cardProject to each project
+        project.imageUrl = extraInfo[index]?.image;
+        project.hueA = extraInfo[index]?.hueA;
+        project.hueB = extraInfo[index]?.hueB;
+      });
+      setFeaturedProject(data);
+    }).catch((error) => {
+      console.error('Error fetching featured projects:', error);
+    });
   }, []);
-
-  useEffect(() => {
-    if (projects.length > 0) {
-      const index = [5, 6, 12]
-      // console.log(projects)
-      const feature = index.map(i => ({
-        ...projects[i]
-
-      }));
-      setFeaturedProject(feature);
-    }
-  }, [projects]);
 
   return (
     <div className='relative'>
@@ -86,32 +70,18 @@ export default function ProjectsComponent() {
 
         <div className="text-2xl font-semibold mb-6">Featured Projects!!</div>
         <div className="mx-auto my-[100px] w-full max-w-[500px] pb-[100px]">
-          {cardProject.map((card, i) => (
-            <ScrollAnimation delay={i * 0.5} key={card.title}>
-              <Card i={i} img={card.image} hueA={card.hueA} hueB={card.hueB} key={card.image}
+          {featuredProject.map((card, i) => (
+            <ScrollAnimation delay={i * 0.5} key={card.name}>
+              <Card i={i} hueA={card.hueA} hueB={card.hueB} key={card.name} image={card.imageUrl} 
+              className="mb-6"
               >
                 <div className='flex flex-col w-full justify-center items-center'>
-                  {/* <div className='w-full absolute opacity-50 pointer-events-none'>
-                    <Image
-                      src={card.logo}
-                      width={400}
-                      height={400}
-                      alt={card.title}
-                      className=''>
-                    </Image>
-                  </div> */}
-                  {/* <Image
-                    src={card.image}
-                    width={200}
-                    height={200}
-                    alt={card.title}>
-                  </Image> */}
                   <div className='w-full flex flex-col justify-center items-center h-full'>
                     <div className='text-3xl p-4 text-shadow-md'>
-                      {featuredProject[i]?.name ?? card.title}
+                      {featuredProject[i]?.name}
                     </div>
                     <div className=' flex text-center text-xl text-shadow-xs py-1 px-4 w-full line-clamp-5 overflow-hidden'>
-                      {featuredProject[i]?.description}
+                      {card.description}
                     </div>
                     <a
                       href={featuredProject[i]?.html_url}
