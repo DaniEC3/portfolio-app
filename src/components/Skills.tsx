@@ -1,13 +1,37 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'motion/react'
 import * as motion from 'motion/react-client'
 import ScrollAnimation from '@/animations/ScrollAnimation'
 import { Brain, Code2, LucideIcon, ServerCog } from 'lucide-react'
 import SkillCard from './SkillCard'
+import ProjectsComponent from './Projects'
 import { AnimatedBackground } from './Styles/AnimatedBackground'
 import GlitchIconWrapper from './Styles/GlitchIconWrapper'
+
+import { getProjectsData, filteredProjectsBySkill } from './ProjectData'
+
+
+interface GitHubRepo {
+  id: number;
+  node_id: string;
+  name: string;
+  full_name: string;
+  private: boolean;
+  owner: {
+    login: string;
+    id: number;
+    node_id: string;
+    avatar_url: string;
+    // ... other owner properties
+  };
+  html_url: string;
+  description: string | null;
+  fork: boolean;
+  url: string;
+  // ... other repository properties
+}
 
 interface Skill {
   name: string;
@@ -61,151 +85,159 @@ const tabs: Tab[] = [frontS, backS, softS]
 
 export default function SkillsComponent() {
   const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0])
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
+  const [filteredProjects, setFilteredProjects] = useState<GitHubRepo[]>([]);
+  // Demo project data (replace with real data/logic as needed)
+  const cardProject = [
+    {
+      image: '/ProjectsSS/MyFlixAngular.png',
+      title: 'MyFlix Angular',
+    },
+    {
+      image: '/ProjectsSS/MyFlixReact.png',
+      title: 'MyFlix React',
+    },
+    {
+      image: '/ProjectsSS/TacosElPuebla.png',
+      title: 'Tacos El Puebla',
+    },
+  ];
+
+  const skillSections = [
+    {
+      tab: skillsTable[0],
+      icon: Code2,
+      label: 'Front end',
+      skills: frontend,
+      aria: 'Front-End Skills',
+    },
+    {
+      tab: skillsTable[1],
+      icon: ServerCog,
+      label: 'Back end',
+      skills: backend,
+      aria: 'Back-End Skills',
+    },
+    {
+      tab: skillsTable[2],
+      icon: Brain,
+      label: 'Soft Skills',
+      skills: soft,
+      aria: 'Soft Skills',
+    },
+  ];
+
+  // Fetch or filter projects based on selected skills  
+
+  useEffect(() => {
+    console.log('Selected Skills changed:', selectedSkills);
+    if (selectedSkills.length > 0) {
+      filteredProjectsBySkill(selectedSkills).then((data) => {
+        console.log('Projects matching selected skills:', data);
+        setFilteredProjects(data);
+      }).catch((error) => {
+        console.error('Error fetching filtered projects:', error);
+      });
+    } else {
+
+      getProjectsData().then((data) => {
+        setFilteredProjects(data);
+      }).catch((error) => {
+        console.error('Error fetching all projects:', error);
+      });
+    }
+  }, [selectedSkills]);
+  useEffect(() => {
+    console.log('Filtered Projects updated:', filteredProjects);
+  }, [filteredProjects]);
 
   return (
-    <div className='relative w-screen h-full md:h-screen flex flex-col items-center justify-center gap-5 px-10
-    mb-120'>
+    <div className='relative w-screen h-full md:h-screen flex flex-col items-center justify-center gap-5 px-10 mb-120'>
       <div className='font-bold text-3xl text-center p-4 mb-5'>My skills</div>
-
-      <div className="relative w-full h-full md:h-screen">
-        {/* Frontend - Top Left */}
-        <div className="flex flex-col w-full md:w-1/2 md:h-1/2 h-[550px] border-4 border-gray-800 rounded-t-xl 
-                    md:absolute md:top-0 md:left-0 mb-8 md:mb-0 group/table">
-          <div className="flex h-16 bg-gray-200 rounded-2xl w-full">
-            <motion.div
-              initial={false}
-              className="w-full h-16 px-4 py-2.5 cursor-pointer flex rounded-t-md items-center bg-gray-800 text-gray-200"
-              onClick={() => setSelectedTab(skillsTable[0])}
-            >
-              <Code2 className="w-5 h-5 mr-2" />
-              Front end
-            </motion.div>
-          </div>
-          <main className="w-full h-full max-h-[500px] flex-1 flex items-center justify-center">
-            <AnimatePresence mode="wait">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 w-full h-full md:h-screen">
+        {skillSections.map((section, idx) => (
+          <div
+            key={section.label}
+            className="flex flex-col w-full h-[530px] md:h-[400px] border-4 border-gray-800 rounded-t-xl group/table"
+          >
+            <div className="flex h-16 bg-gray-200 rounded-2xl w-full">
               <motion.div
-                key={selectedTab ? selectedTab.label : 'empty'}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="w-full h-full flex items-center justify-center"
+                initial={false}
+                className="w-full h-16 px-4 py-2.5 cursor-pointer flex rounded-t-md items-center bg-gray-800 text-gray-200"
+                onClick={() => setSelectedTab(section.tab)}
               >
-                {selectedTab.label === 'Front-End' ? (
-                  <SkillCard
-                    frontend={frontend}
-                    backend={backend}
-                    soft={soft}
-                    selectedTab={selectedTab}
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center"
-                    onClick={() => setSelectedTab(skillsTable[0])}
-                  >
-                    <GlitchIconWrapper
-                      icon={Code2}
-                      className="w-full h-full md:max-h-[270px] text-gray-500 p-4 bg-gray-400/50
-                      group-hover/table:cursor-crosshair"
-                      aria-label="Front-End Skills"
-                    />
-                  </div>
-                )}
+                <section.icon className="w-5 h-5 mr-2" />
+                {section.label}
               </motion.div>
-            </AnimatePresence>
-          </main>
-        </div>
-
-        {/* Backend - Middle Center */}
-        <div className="flex flex-col w-full md:w-1/2 md:h-1/2 h-[550px] border-4 border-gray-800 rounded-t-xl 
-                    md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 mb-8 md:mb-0 group/table">
-          <div className="flex h-16 bg-gray-200 rounded-2xl w-full">
-            <motion.div
-              initial={false}
-              className="w-full h-16 px-4 py-2.5 cursor-pointer flex rounded-t-md items-center bg-gray-800 text-gray-200"
-              onClick={() => setSelectedTab(skillsTable[1])}
-            >
-              <ServerCog className="w-5 h-5 mr-2" />
-              Back end
-            </motion.div>
+            </div>
+            <main className="w-full h-full max-h-[460px] flex-1 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedTab ? selectedTab.label : 'empty'}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -10, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full h-full flex items-center justify-center"
+                >
+                  {selectedTab.label === section.tab.label ? (
+                    <SkillCard
+                      frontend={frontend}
+                      backend={backend}
+                      soft={soft}
+                      selectedTab={selectedTab}
+                      onSkillClick={(skillName: string) => {
+                        setSelectedSkills(prev =>
+                          prev.includes(skillName)
+                            ? prev.filter(s => s !== skillName)
+                            : [...prev, skillName]
+                        );
+                      }}
+                      activeSkills={selectedSkills}
+                    />
+                  ) : (
+                    <div className="w-full h-full md:max-h-[330px] flex items-center justify-center"
+                      onClick={() => setSelectedTab(section.tab)}
+                    >
+                      <GlitchIconWrapper
+                        icon={section.icon}
+                        className="w-full h-full  text-gray-500 p-4 bg-gray-400/50 group-hover/table:cursor-crosshair"
+                        aria-label={section.aria}
+                      />
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </main>
           </div>
-          <main className="w-full h-full max-h-[500px] flex-1 flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedTab ? selectedTab.label : 'empty'}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="w-full h-full flex items-center justify-center"
-              >
-                {selectedTab.label === 'Back-End' ? (
-                  <SkillCard
-                    frontend={frontend}
-                    backend={backend}
-                    soft={soft}
-                    selectedTab={selectedTab}
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center"
-                    onClick={() => setSelectedTab(skillsTable[1])}
-                  >
-                    <GlitchIconWrapper
-                      icon={ServerCog}
-                      className="w-full h-full md:max-h-[270px] text-gray-500 p-4 bg-gray-400/50
-                      group-hover/table:cursor-crosshair"
-                      aria-label="Back-End Skills"
-                    />
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </main>
-        </div>
+        ))}
+        {/* Fourth grid cell: Filtered Projects */}
+        <div className="flex flex-col w-full h-[550px] md:h-[400px] border-4 border-gray-800 rounded-t-xl group/table bg-gray-100">
+          <div className="flex h-16 bg-gray-200 rounded-2xl w-full items-center justify-center font-bold text-xl text-gray-800">Filtered Projects</div>
+          <main className="w-full h-full max-h-[460px] flex-1 flex flex-col items-center justify-center p-4 overflow-auto">
 
-        {/* Soft Skills - Bottom Right */}
-        <div className="flex flex-col w-full md:w-1/2 md:h-1/2 h-[550px] border-4 border-gray-800 rounded-t-xl 
-                    md:absolute md:bottom-0 md:right-0 group/table">
-          <div className="flex h-16 bg-gray-200 rounded-2xl w-full">
-            <motion.div
-              initial={false}
-              className="w-full h-16 px-4 py-2.5 cursor-pointer flex rounded-t-md items-center bg-gray-800 text-gray-200"
-              onClick={() => setSelectedTab(skillsTable[2])}
-            >
-              <Brain className="w-5 h-5 mr-2" />
-              Soft Skills
-            </motion.div>
-          </div>
-          <main className="w-full h-full max-h-[500px] flex-1 flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedTab ? selectedTab.label : 'empty'}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="w-full h-full flex items-center justify-center"
-              >
-                {selectedTab.label === 'Soft-Skills' ? (
-                  <SkillCard
-                    frontend={frontend}
-                    backend={backend}
-                    soft={soft}
-                    selectedTab={selectedTab}
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center"
-                    onClick={() => setSelectedTab(skillsTable[2])}
-                  >
-                    <GlitchIconWrapper
-                      icon={Brain}
-                      className="w-full h-full md:max-h-[270px] text-gray-500 p-4 bg-gray-400/50
-                      group-hover/table:cursor-crosshair"
-                      aria-label="Soft Skills"
-                    />
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
+            {filteredProjects.map((project: GitHubRepo) => (
+              <div key={project.name} className="flex flex-col items-center justify-center mb-6 p-4 bg-white rounded shadow w-full">
+                <div className="font-semibold text-lg mb-1 text-center">{project.name ? project.name : 'No name available.'}</div>
+                <div className="text-gray-600 text-sm mb-2 text-center">{project.description ? project.description : 'No description available.'}</div>
+                <div className="flex flex-wrap gap-2 justify-center items-center">
+                  {/* Show up to 3 skills, truncate if more */}
+                  {/* {(project.skillsUsed ? project.skillsUsed.slice(0,3) : []).map((skill, idx) => (
+                      <span key={skill + idx} className="px-2 py-1 bg-gray-200 rounded text-xs text-gray-800">{skill}</span>
+                    ))}
+                    {project.skillsUsed && project.skillsUsed.length > 3 && (
+                      <span className="px-2 py-1 bg-gray-300 rounded text-xs text-gray-500">...</span>
+                    )} */}
+                </div>
+              </div>
+            )
+            )}
+
+            {selectedSkills.length > 0 && (
+              <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded" onClick={() => setSelectedSkills([])}>
+                Clear Filters
+              </button>
+            )}
           </main>
         </div>
       </div>

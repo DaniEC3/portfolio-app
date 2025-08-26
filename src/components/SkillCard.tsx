@@ -7,17 +7,21 @@ import { AnimatePresence } from "motion/react";
 type Skill = { name: string; color: string; level: number };
 type Tab = { icon: LucideIcon; label: string };
 interface SkillCardProps {
-  frontend: Skill[]; backend: Skill[]; soft: Skill[]; selectedTab: Tab;
+  frontend: Skill[];
+  backend: Skill[];
+  soft: Skill[];
+  selectedTab: Tab;
+  onSkillClick?: (skillName: string) => void;
+  activeSkills?: string[] | null;
 }
 
 
 
-export default function SkillCard({ frontend, backend, soft, selectedTab }: SkillCardProps) {
-  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+export default function SkillCard({ frontend, backend, soft, selectedTab, onSkillClick, activeSkills }: SkillCardProps) {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1); // for slide direction
   const [PAGE_SIZE, setPageSize] = useState(8); // items per page
-
+  console.log('Active Skills',activeSkills)
   const list =
     selectedTab.label === 'Front-End' ? frontend :
       selectedTab.label === 'Back-End' ? backend :
@@ -34,7 +38,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
   // When the tab changes, reset pagination and active fill
   useEffect(() => {
     setPage(0);
-    setActiveSkill(null);
+    // setActiveSkill(null);
   }, [selectedTab.label]);
 
   // Handle page navigation
@@ -65,7 +69,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
   const goNext = () => {
     if (page < totalPages - 1) {
       setDirection(1);
-      setActiveSkill(null);
+      // setActiveSkill(null);
       setPage(p => p + 1);
     }
   };
@@ -73,7 +77,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
   const goPrev = () => {
     if (page > 0) {
       setDirection(-1);
-      setActiveSkill(null);
+      // setActiveSkill(null);
       setPage(p => p - 1);
     }
   };
@@ -110,25 +114,25 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
               {/* Review the w-75% for responsiveness */}
               <div className="w-[75%] h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-3">
                 {pageItems.map((S) => {
-                  const isActive = activeSkill === S.name;
+                  // const isActive = activeSkills === S.name;
                   return (
                     <button
                       key={S.name}
-                      onClick={() => setActiveSkill(isActive ? null : S.name)}
+                      onClick={() => onSkillClick ? onSkillClick(S.name) : null}
                       className="relative w-full group md:h-12 h-16 border rounded-lg overflow-hidden bg-gray-200 
                       hover:cursor-pointer text-left"
-                      aria-pressed={isActive}
+                    // aria-pressed={isActive}
                     >
                       <motion.div
                         className="h-full absolute inset-y-0 group-hover:bg-amber-700 left-0 z-0
                         pointer-events-none"
                         style={{ backgroundColor: S.color }}
                         initial={{ width: 0 }}
-                        animate={{ width: isActive ? `${S.level}%` : 0 }}
+                        // animate={{ width: isActive ? `${S.level}%` : 0 }}
                         transition={{ duration: 1, ease: "easeInOut" }}
                       />
                       <span className="relative z-10 text-gray-800 font-bold px-3">
-                        {S.name} {isActive ? `– ${S.level}%` : ''}
+                        {/* {S.name} {isActive ? `– ${S.level}%` : ''} */}
                       </span>
                     </button>
                   );
@@ -156,7 +160,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab }: Skil
                   key={i}
                   onClick={() => {
                     setDirection(i > page ? 1 : -1);
-                    setActiveSkill(null);
+                    // setActiveSkill(null);
                     setPage(i);
                   }}
                   className={`h-2.5 w-2.5 rounded-full ${i === page ? 'bg-gray-800' : 'bg-gray-500/40'}`}

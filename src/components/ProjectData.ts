@@ -1,4 +1,5 @@
 import { fetchGitHubProjects } from '@/app/lib/github';
+import type { GitHubProject } from '@/types/github';
 
 
 export async function getProjectsData() {
@@ -18,4 +19,16 @@ export async function getFeaturedProject() {
     .map(i => projects[i])
     .filter(Boolean); // removes undefined values if index doesn’t exist
   return featureProjects;
+}
+
+export async function filteredProjectsBySkill(skills: string[]) {
+  const projects = await fetchGitHubProjects();
+  const filteredProjects =projects.filter((project: GitHubProject) =>
+    skills.some(skill =>
+      project.name.toLowerCase().includes(skill.toLowerCase()) ||
+      (project.topics && project.topics.some((topic: string) => topic.toLowerCase().includes(skill.toLowerCase())))
+    )
+  );
+  console.log('Filtered Projects:', filteredProjects)
+  return filteredProjects;
 }
