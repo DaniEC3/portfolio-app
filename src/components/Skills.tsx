@@ -6,7 +6,6 @@ import * as motion from 'motion/react-client'
 import ScrollAnimation from '@/animations/ScrollAnimation'
 import { Brain, Code2, LucideIcon, ServerCog } from 'lucide-react'
 import SkillCard from './SkillCard'
-import ProjectsComponent from './Projects'
 import { AnimatedBackground } from './Styles/AnimatedBackground'
 import GlitchIconWrapper from './Styles/GlitchIconWrapper'
 
@@ -47,28 +46,28 @@ const frontend: Skill[] = [
   { name: "JavaScript", color: "#F7DF1E", level: 85 },  // yellow
   { name: "TypeScript", color: "#3178C6", level: 80 },  // blue
   { name: "React", color: "#61DAFB", level: 85 },       // cyan
-  { name: "Next.js", color: "#000000", level: 80 },     // black
+  { name: "Next.js", color: "#000000", level: 85 },     // black
   { name: "Angular", color: "#DD0031", level: 70 },     // red
   { name: "Tailwind CSS", color: "#06B6D4", level: 85 },// teal
-  { name: "Framer Motion", color: "#E83E8C", level: 75 }// pink
+  { name: "Framer Motion", color: "#E83E8C", level: 80 }// pink
 ];
 
 const backend: Skill[] = [
   { name: "Node.js", color: "#339933", level: 80 },
-  { name: "Express", color: "#000000", level: 75 },
-  { name: "REST APIs", color: "#4B5563", level: 85 },
+  { name: "Express", color: "#000000", level: 70 },
+  { name: "REST APIs", color: "#4B5563", level: 80 },
   { name: "MongoDB", color: "#47A248", level: 80 },
-  { name: "Firebase", color: "#FFCA28", level: 70 },       // yellow-orange
-  { name: "Auth (JWT/OAuth)", color: "#FBBF24", level: 75 },
+  { name: "Firebase", color: "#FFCA28", level: 75 },       // yellow-orange
+  { name: "Auth (JWT/OAuth)", color: "#FBBF24", level: 70 },
   { name: "Testing", color: "#6B7280", level: 65 }
 ];
 
 const soft: Skill[] = [
   { name: "Communication", color: "#3B82F6", level: 90 },
   { name: "Teamwork", color: "#10B981", level: 85 },
-  { name: "Problem Solving", color: "#FACC15", level: 80 },
-  { name: "Adaptability", color: "#8B5CF6", level: 85 },
-  { name: "Time Management", color: "#EC4899", level: 80 },
+  { name: "Problem Solving", color: "#FACC15", level: 90 },
+  { name: "Adaptability", color: "#8B5CF6", level: 95 },
+  { name: "Time Management", color: "#EC4899", level: 85 },
   { name: "Leadership", color: "#6366F1", level: 75 },
   { name: "Creativity", color: "#EF4444", level: 85 },
   { name: "Attention to Detail", color: "#9CA3AF", level: 80 }
@@ -87,22 +86,6 @@ export default function SkillsComponent() {
   const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [filteredProjects, setFilteredProjects] = useState<GitHubRepo[]>([]);
-  // Demo project data (replace with real data/logic as needed)
-  const cardProject = [
-    {
-      image: '/ProjectsSS/MyFlixAngular.png',
-      title: 'MyFlix Angular',
-    },
-    {
-      image: '/ProjectsSS/MyFlixReact.png',
-      title: 'MyFlix React',
-    },
-    {
-      image: '/ProjectsSS/TacosElPuebla.png',
-      title: 'Tacos El Puebla',
-    },
-  ];
-
   const skillSections = [
     {
       tab: skillsTable[0],
@@ -152,70 +135,75 @@ export default function SkillsComponent() {
   }, [filteredProjects]);
 
   return (
-    <div className='relative w-screen h-full md:h-screen flex flex-col items-center justify-center gap-5 px-10 mb-120'>
+    <div className='relative w-screen h-full md:h-full flex flex-col items-center justify-center gap-5 px-10 mb-120'>
+      <AnimatedBackground />
       <div className='font-bold text-3xl text-center p-4 mb-5'>My skills</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 w-full h-full md:h-screen">
-        {skillSections.map((section, idx) => (
-          <div
-            key={section.label}
-            className="flex flex-col w-full h-[530px] md:h-[400px] border-4 border-gray-800 rounded-t-xl group/table"
-          >
-            <div className="flex h-16 bg-gray-200 rounded-2xl w-full">
-              <motion.div
-                initial={false}
-                className="w-full h-16 px-4 py-2.5 cursor-pointer flex rounded-t-md items-center bg-gray-800 text-gray-200"
-                onClick={() => setSelectedTab(section.tab)}
+      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-y-6 gap-x-10 w-full h-full md:h-screen">
+        {skillSections.map((section) => (
+          <div key={section.label} className="relative w-full h-full">
+            <ScrollAnimation>
+              <div
+                key={section.label}
+                className="flex flex-col w-full h-[530px] md:h-[400px]  border-4 border-gray-800 rounded-t-xl group/table"
               >
-                <section.icon className="w-5 h-5 mr-2" />
-                {section.label}
-              </motion.div>
-            </div>
-            <main className="w-full h-full max-h-[460px] flex-1 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={selectedTab ? selectedTab.label : 'empty'}
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -10, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  {selectedTab.label === section.tab.label ? (
-                    <SkillCard
-                      frontend={frontend}
-                      backend={backend}
-                      soft={soft}
-                      selectedTab={selectedTab}
-                      onSkillClick={(skillName: string) => {
-                        setSelectedSkills(prev =>
-                          prev.includes(skillName)
-                            ? prev.filter(s => s !== skillName)
-                            : [...prev, skillName]
-                        );
-                      }}
-                      activeSkills={selectedSkills}
-                    />
-                  ) : (
-                    <div className="w-full h-full md:max-h-[330px] flex items-center justify-center"
-                      onClick={() => setSelectedTab(section.tab)}
+                <div className="flex h-16  bg-gray-200 rounded-2xl w-full">
+                  <motion.div
+                    initial={false}
+                    className="w-full h-16 px-4 py-2.5 cursor-pointer flex rounded-t-md items-center bg-gray-800 text-gray-200"
+                    onClick={() => setSelectedTab(section.tab)}
+                  >
+                    <section.icon className="w-5 h-5 mr-2" />
+                    {section.label}
+                  </motion.div>
+                </div>
+                <main className="w-full h-full max-h-[460px] flex-1 flex items-center justify-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={selectedTab ? selectedTab.label : 'empty'}
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-full h-full flex items-center justify-center"
                     >
-                      <GlitchIconWrapper
-                        icon={section.icon}
-                        className="w-full h-full  text-gray-500 p-4 bg-gray-400/50 group-hover/table:cursor-crosshair"
-                        aria-label={section.aria}
-                      />
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </main>
+                      {selectedTab.label === section.tab.label ? (
+                        <SkillCard
+                          frontend={frontend}
+                          backend={backend}
+                          soft={soft}
+                          selectedTab={selectedTab}
+                          onSkillClick={(skillName: string) => {
+                            setSelectedSkills(prev =>
+                              prev.includes(skillName)
+                                ? prev.filter(s => s !== skillName)
+                                : [...prev, skillName]
+                            );
+                          }}
+                          activeSkills={selectedSkills}
+                          filteredProjects={filteredProjects}
+                        />
+                      ) : (
+                        <div className="w-full h-full md:max-h-[330px] flex items-center justify-center"
+                          onClick={() => setSelectedTab(section.tab)}
+                        >
+                          <GlitchIconWrapper
+                            icon={section.icon}
+                            className="w-full h-full  text-gray-500 p-4 bg-gray-400/50 group-hover/table:cursor-crosshair"
+                            aria-label={section.aria}
+                          />
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </main>
+              </div>
+            </ScrollAnimation>
           </div>
         ))}
         {/* Fourth grid cell: Filtered Projects */}
         <div className="flex flex-col w-full h-[550px] md:h-[400px] border-4 border-gray-800 rounded-t-xl group/table bg-gray-100">
           <div className="flex h-16 bg-gray-200 rounded-2xl w-full items-center justify-center font-bold text-xl text-gray-800">Filtered Projects</div>
-          <main className="w-full h-full max-h-[460px] flex-1 flex flex-col items-center justify-center p-4 overflow-auto">
-
+          <main className="w-full h-full max-h-[460px] flex-1 flex flex-col items-start justify-start p-4 overflow-y-auto">
             {filteredProjects.map((project: GitHubRepo) => (
               <div key={project.name} className="flex flex-col items-center justify-center mb-6 p-4 bg-white rounded shadow w-full">
                 <div className="font-semibold text-lg mb-1 text-center">{project.name ? project.name : 'No name available.'}</div>

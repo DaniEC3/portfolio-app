@@ -13,11 +13,32 @@ interface SkillCardProps {
   selectedTab: Tab;
   onSkillClick?: (skillName: string) => void;
   activeSkills?: string[] | null;
+  filteredProjects?: GitHubRepo[]; // Adjust type as needed
+}
+
+interface GitHubRepo {
+  id: number;
+  node_id: string;
+  name: string;
+  full_name: string;
+  private: boolean;
+  owner: {
+    login: string;
+    id: number;
+    node_id: string;
+    avatar_url: string;
+    
+  };
+  html_url: string;
+  description: string | null;
+  fork: boolean;
+  url: string;
+  topics?: string[];
 }
 
 
 
-export default function SkillCard({ frontend, backend, soft, selectedTab, onSkillClick, activeSkills }: SkillCardProps) {
+export default function SkillCard({ frontend, backend, soft, selectedTab, onSkillClick, activeSkills, filteredProjects }: SkillCardProps) {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1); // for slide direction
   const [PAGE_SIZE, setPageSize] = useState(8); // items per page
@@ -35,6 +56,8 @@ export default function SkillCard({ frontend, backend, soft, selectedTab, onSkil
     return list?.slice(start, start + PAGE_SIZE) ?? [];
   }, [list, page, PAGE_SIZE]);
 
+
+  
   // When the tab changes, reset pagination and active fill
   useEffect(() => {
     setPage(0);
@@ -114,25 +137,36 @@ export default function SkillCard({ frontend, backend, soft, selectedTab, onSkil
               {/* Review the w-75% for responsiveness */}
               <div className="w-[75%] h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-3">
                 {pageItems.map((S) => {
-                  // const isActive = activeSkills === S.name;
+                  const isActive = activeSkills?.includes(S.name);
+                  // Only show project count for non-soft skills
+                  let projectCount = 0 ;
+                  if (typeof window !== 'undefined' && selectedTab.label !== 'Soft Skills') {
+                    projectCount = filteredProjects
+                      ? filteredProjects.filter((p: GitHubRepo) => {
+                          // Check if project topics or name includes the skill
+                          return (
+                            (p.topics && p.topics.some((topic: string) => topic.toLowerCase().includes(S.name.toLowerCase()))) ||
+                            (p.name && p.name.toLowerCase().includes(S.name.toLowerCase()))
+                          );
+                        }).length
+                      : 0;
+                  }
                   return (
                     <button
                       key={S.name}
                       onClick={() => onSkillClick ? onSkillClick(S.name) : null}
-                      className="relative w-full group md:h-12 h-16 border rounded-lg overflow-hidden bg-gray-200 
-                      hover:cursor-pointer text-left"
-                    // aria-pressed={isActive}
+                      className="relative w-full group md:h-12 h-16 border rounded-lg overflow-hidden bg-gray-200 hover:cursor-pointer text-left"
                     >
                       <motion.div
-                        className="h-full absolute inset-y-0 group-hover:bg-amber-700 left-0 z-0
-                        pointer-events-none"
+                        className="h-full absolute inset-y-0 left-0 z-0 pointer-events-none"
                         style={{ backgroundColor: S.color }}
                         initial={{ width: 0 }}
-                        // animate={{ width: isActive ? `${S.level}%` : 0 }}
-                        transition={{ duration: 1, ease: "easeInOut" }}
+                        animate={{ width: isActive ? '100%' : 0 }}
+                        transition={{ duration: 1, ease: 'easeInOut' }}
                       />
                       <span className="relative z-10 text-gray-800 font-bold px-3">
-                        {/* {S.name} {isActive ? `– ${S.level}%` : ''} */}
+                        {S.name}
+                        {isActive ? ` – ${projectCount} project${projectCount === 1 ? '' : 's'}` : ''}
                       </span>
                     </button>
                   );
