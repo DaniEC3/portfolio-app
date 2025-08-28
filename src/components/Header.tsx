@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 
 import ThemeToggleComponent from './ThemeToggle';
 import GlitchIconWrapper from './Styles/GlitchIconWrapper';
-
+import { useRef } from 'react';
 
 export default function HeaderComponent() {
   const [isAtTop, setIsAtTop] = useState(true);
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
   const navItems = [
     {
       label: 'Home',
@@ -44,7 +46,12 @@ export default function HeaderComponent() {
       const scrollY = window.scrollY;
       const atTop = scrollY < 10;
       setIsAtTop(atTop);
-      // console.log('Scroll position:', scrollY, 'Is at top:', atTop); // Debugging line
+      if (scrollY > lastScrollY.current && scrollY > 50) {
+        setShowHeader(false); // scrolling down
+      } else {
+        setShowHeader(true); // scrolling up
+      }
+      lastScrollY.current = scrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -59,8 +66,7 @@ export default function HeaderComponent() {
         'from-gray-800 from-16% via-gray-700  to-gray-200 group/header',
         'mask-b-from-80% mask-b-to-100%',
         isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s hover:h-65' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
-
-
+        showHeader ? 'translate-y-0' : '-translate-y-full',
       )}>
         <div className='w-full justify-end'>
           <ThemeToggleComponent />
