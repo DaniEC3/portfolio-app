@@ -46,20 +46,24 @@ const frontend: Skill[] = [
   { name: "JavaScript", color: "#F7DF1E", level: 85 },  // yellow
   { name: "TypeScript", color: "#3178C6", level: 80 },  // blue
   { name: "React", color: "#61DAFB", level: 85 },       // cyan
-  { name: "Next.js", color: "#000000", level: 85 },     // black
+  { name: "ReactNative", color: "#61DAFB", level: 75 }, // light cyan (same React branding)
+  { name: "Nextjs", color: "#000000", level: 85 },      // black
   { name: "Angular", color: "#DD0031", level: 70 },     // red
-  { name: "Tailwind CSS", color: "#06B6D4", level: 85 },// teal
-  { name: "Framer Motion", color: "#E83E8C", level: 80 }// pink
+  { name: "TailwindCSS", color: "#06B6D4", level: 85 }, // teal
+  { name: "Bootstrap", color: "#7952B3", level: 75 },   // purple
+  { name: "Vite", color: "#646CFF", level: 70 },        // violet
+  { name: "FramerMotion", color: "#E83E8C", level: 80 } // pink
 ];
 
 const backend: Skill[] = [
-  { name: "Node.js", color: "#339933", level: 80 },
+  { name: "Nodejs", color: "#339933", level: 80 },
   { name: "Express", color: "#000000", level: 70 },
-  { name: "REST APIs", color: "#4B5563", level: 80 },
+  { name: "APIs", color: "#4B5563", level: 80 },
   { name: "MongoDB", color: "#47A248", level: 80 },
   { name: "Firebase", color: "#FFCA28", level: 75 },       // yellow-orange
-  { name: "Auth (JWT/OAuth)", color: "#FBBF24", level: 70 },
-  { name: "Testing", color: "#6B7280", level: 65 }
+  { name: "Auth", color: "#FBBF24", level: 70 },
+  { name: "Testing", color: "#6B7280", level: 65 },
+  { name: "Vercel", color: "#000000", level: 80 }          // black (Vercel branding)
 ];
 
 const soft: Skill[] = [
@@ -113,10 +117,10 @@ export default function SkillsComponent() {
   // Fetch or filter projects based on selected skills  
 
   useEffect(() => {
-    console.log('Selected Skills changed:', selectedSkills);
+    // console.log('Selected Skills changed:', selectedSkills);
     if (selectedSkills.length > 0) {
       filteredProjectsBySkill(selectedSkills).then((data) => {
-        console.log('Projects matching selected skills:', data);
+        // console.log('Projects matching selected skills:', data);
         setFilteredProjects(data);
       }).catch((error) => {
         console.error('Error fetching filtered projects:', error);
@@ -131,7 +135,7 @@ export default function SkillsComponent() {
     }
   }, [selectedSkills]);
   useEffect(() => {
-    console.log('Filtered Projects updated:', filteredProjects);
+    // console.log('Filtered Projects updated:', filteredProjects);
   }, [filteredProjects]);
 
   return (
@@ -172,7 +176,7 @@ export default function SkillsComponent() {
                           backend={backend}
                           soft={soft}
                           selectedTab={selectedTab}
-                          onSkillClick={(skillName: string) => {
+                          onSkillClick={selectedTab.label === 'Soft-Skills' ? undefined : (skillName: string) => {
                             setSelectedSkills(prev =>
                               prev.includes(skillName)
                                 ? prev.filter(s => s !== skillName)

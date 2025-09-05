@@ -42,7 +42,7 @@ export default function SkillCard({ frontend, backend, soft, selectedTab, onSkil
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1); // for slide direction
   const [PAGE_SIZE, setPageSize] = useState(8); // items per page
-  console.log('Active Skills',activeSkills)
+  // console.log('Active Skills',activeSkills)
   const list =
     selectedTab.label === 'Front-End' ? frontend :
       selectedTab.label === 'Back-End' ? backend :
