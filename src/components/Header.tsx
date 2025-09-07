@@ -68,8 +68,8 @@ export default function HeaderComponent() {
         isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s hover:h-65' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
         showHeader ? 'translate-y-0' : '-translate-y-full',
       )}>
-        <div className='w-full justify-end'>
-          <ThemeToggleComponent />
+        <div className='w-full justify-end h-6'>
+          {/* <ThemeToggleComponent /> */}
         </div>
 
         <div className={clsx(
@@ -79,7 +79,7 @@ export default function HeaderComponent() {
 
         )}>
           <Image
-            src={'/logo/LogoName-W-nb.png'}
+            src={'/Logo/LogoName-W-nb.png'}
             width={400}
             height={400}
             className={clsx(

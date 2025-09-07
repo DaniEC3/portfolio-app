@@ -14,15 +14,12 @@ export default function Home() {
 
       <main className="scroll-smooth flex-grow">
         <div id="home" className="scroll-mt-20">
-
         </div>
         <HeaderComponent></HeaderComponent>
         <div id="home">
           <HeroComponent />
         </div>
-
-          <AboutComponent />
-
+        <AboutComponent />
         <div id="projects" className="scroll-mt-20">
           <ProjectsComponent />
         </div>
@@ -33,7 +30,6 @@ export default function Home() {
       <div id="contact">
         <FooterComponent></FooterComponent>
       </div>
-
     </div>
   )
 }

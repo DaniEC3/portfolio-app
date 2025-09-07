@@ -120,7 +120,7 @@ export default function SkillsComponent() {
     // console.log('Selected Skills changed:', selectedSkills);
     if (selectedSkills.length > 0) {
       filteredProjectsBySkill(selectedSkills).then((data) => {
-        // console.log('Projects matching selected skills:', data);
+        console.log('Projects matching selected skills:', data);
         setFilteredProjects(data);
       }).catch((error) => {
         console.error('Error fetching filtered projects:', error);

@@ -27,7 +27,7 @@ export async function getFeaturedProject() {
     return []; // or null, depending on your use case
   }
 
-  const indices = [5, 6, 12];
+  const indices = [8, 3, 4];
   const featureProjects = indices
     .map(i => projects[i])
     .filter(Boolean); // removes undefined values if index doesn’t exist
