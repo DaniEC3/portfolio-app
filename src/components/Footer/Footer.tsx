@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Github, Linkedin, Mail, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
+import { Github, Linkedin, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { initializeApp } from 'firebase/app';
