@@ -6,7 +6,7 @@ import { AnimatedBackground } from './Styles/AnimatedBackground';
 
 import Card from './Styles/CardProject';
 
-import { getFeaturedProject } from './ProjectData';
+import { getProjectsData } from './ProjectData';
 
 interface Repo {
   id: number;
@@ -25,8 +25,19 @@ interface CardProject {
   logo: string;
 }
 
+interface ExtraInfo {
+  image: string;
+  hueA: number;
+  hueB: number;
+  logo: string;
+}
+interface Project {
+  name: string;
+}
+
 export default function ProjectsComponent() {
   const [featuredProject, setFeaturedProject] = useState<Repo[]>([]);
+  const keyWordsProjects = ['myflix-angular', 'tacoselpuebla', 'jangorecipes'];
   const extraInfo: ExtraInfo[] = [
     {
       image: '/ProjectsSS/MyFlixAngular.png',
@@ -50,18 +61,26 @@ export default function ProjectsComponent() {
   ];
 
   useEffect(() => {
-    getFeaturedProject().then((data) => {
-      data.forEach((project, index) => {
+    getProjectsData().then((data) => {
+      const filtered = data.filter(
+        (project: Project) =>
+          keyWordsProjects.includes(project.name.toLowerCase())
+      );
+      filtered.forEach((project: Repo, index: number) => {
         // Assign imageUrl, hueA, and hueB from cardProject to each project
         project.imageUrl = extraInfo[index]?.image;
         project.hueA = extraInfo[index]?.hueA;
         project.hueB = extraInfo[index]?.hueB;
       });
-      setFeaturedProject(data);
+      setFeaturedProject(filtered);
+      
     }).catch((error) => {
       console.error('Error fetching featured projects:', error);
     });
+
   }, []);
+
+  console.log('Filtered projects:', featuredProject);
 
   return (
     <div className='relative'>
@@ -72,8 +91,7 @@ export default function ProjectsComponent() {
         <div className="mx-auto my-[100px] w-full max-w-[500px] pb-[100px]">
           {featuredProject.map((card, i) => (
             <ScrollAnimation delay={i * 0.5} key={card.name}>
-              <Card i={i} hueA={card.hueA} hueB={card.hueB} key={card.name} image={card.imageUrl} 
-              className="mb-6"
+              <Card i={i} hueA={card.hueA} hueB={card.hueB} key={card.name} imageUrl={card.imageUrl}
               >
                 <div className='flex flex-col w-full justify-center items-center'>
                   <div className='w-full flex flex-col justify-center items-center h-full'>
@@ -101,7 +119,7 @@ export default function ProjectsComponent() {
                     >
                       🔗 Live demo
                     </a>
-                   
+
                   </div>
                 </div>
               </Card>

@@ -148,7 +148,7 @@ export default function SkillsComponent() {
     }
   }, [selectedSkills]);
   useEffect(() => {
-    console.log('Filtered Projects updated:', filteredProjects);
+    // console.log('Filtered Projects updated:', filteredProjects);
   }, [filteredProjects]);
 
   return (

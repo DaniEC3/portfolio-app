@@ -4,16 +4,16 @@ import { AnimatedBackgroundCard } from "./AnimatedBackgroundCard";
 
 
 interface CardProps {
-  img: string;
   hueA: number;
   hueB: number;
   i: number;
   children: React.ReactNode
+  imageUrl?: string;
 }
 
 
 
-export default function Card({ hueA, hueB, i, children }: CardProps) {
+export default function Card({ hueA, hueB, i, children, imageUrl }: CardProps) {
   const cardVariants: Variants = {
     offscreen: { y: 300 },
     onscreen: {
