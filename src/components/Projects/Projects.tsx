@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react';
 
 import ScrollAnimation from '@/animations/ScrollAnimation';
-import { AnimatedBackground } from './Styles/AnimatedBackground';
+import { AnimatedBackground } from '../Styles/AnimatedBackground';
 
-import Card from './Styles/CardProject';
+import Card from '../Styles/CardProject';
 
-import { getProjectsData } from './ProjectData';
+import { getProjectsData } from '../utils/ProjectData';
 
 interface Repo {
   id: number;
@@ -16,6 +16,7 @@ interface Repo {
   imageUrl?: string;
   hueA: number;
   hueB: number;
+  homepage?: string;
 }
 
 interface CardProject {
@@ -73,7 +74,7 @@ export default function ProjectsComponent() {
         project.hueB = extraInfo[index]?.hueB;
       });
       setFeaturedProject(filtered);
-      
+
     }).catch((error) => {
       console.error('Error fetching featured projects:', error);
     });
@@ -101,17 +102,19 @@ export default function ProjectsComponent() {
                     <div className=' flex text-center text-xl text-shadow-xs py-1 px-4 w-full line-clamp-5 overflow-hidden'>
                       {card.description}
                     </div>
-                    <a
-                      href={featuredProject[i]?.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm p-4 font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center
+                    <div className='flex justify-around w-full mt-4 p-3'>
+                      <a
+                        href={featuredProject[i]?.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center
                       hover:cursor-pointer"
-                    >
-                      🔗 View on GitHub
-                    </a>
+                      >
+                        🔗 View on GitHub
+                      </a>
+                    </div>
                     <a
-                      href={featuredProject[i]?.html_url}
+                      href={featuredProject[i]?.homepage || featuredProject[i]?.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm  font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center

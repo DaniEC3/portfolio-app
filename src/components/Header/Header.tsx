@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import ThemeToggleComponent from './ThemeToggle';
-import GlitchIconWrapper from './Styles/GlitchIconWrapper';
+import GlitchIconWrapper from '../Styles/GlitchIconWrapper';
 
 
 export default function HeaderComponent() {

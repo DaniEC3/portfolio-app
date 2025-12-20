@@ -2,7 +2,7 @@
 
 export const AnimatedBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute z-0 inset-0 overflow-hidden pointer-events-none">
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 1200 800"

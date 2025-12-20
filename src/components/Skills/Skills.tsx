@@ -6,11 +6,11 @@ import * as motion from 'motion/react-client'
 import ScrollAnimation from '@/animations/ScrollAnimation'
 import { Brain, Code2, LucideIcon, ServerCog } from 'lucide-react'
 import SkillCard from './SkillCard'
-import ProjectsComponent from './Projects'
-import { AnimatedBackground } from './Styles/AnimatedBackground'
-import GlitchIconWrapper from './Styles/GlitchIconWrapper'
+import ProjectsComponent from '../Projects/Projects'
+import { AnimatedBackground } from '../Styles/AnimatedBackground'
+import GlitchIconWrapper from '../Styles/GlitchIconWrapper'
 
-import { getProjectsData, filteredProjectsBySkill } from './ProjectData'
+import { getProjectsData, filteredProjectsBySkill } from '../utils/ProjectData'
 
 
 interface GitHubRepo {
