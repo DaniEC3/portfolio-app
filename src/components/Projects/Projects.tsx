@@ -7,6 +7,7 @@ import { AnimatedBackground } from '../Styles/AnimatedBackground';
 import Card from '../Styles/CardProject';
 
 import { getProjectsData } from '../utils/ProjectData';
+import ProjectModal from './ProjectModal';
 
 interface Repo {
   id: number;
@@ -39,6 +40,9 @@ interface Project {
 export default function ProjectsComponent() {
   const [featuredProject, setFeaturedProject] = useState<Repo[]>([]);
   const keyWordsProjects = ['myflix-angular', 'tacoselpuebla', 'jangorecipes'];
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClosed, setIsClosed] = useState(true);
+  const [modalProject, setModalProject] = useState<Repo | undefined>(undefined);
   const extraInfo: ExtraInfo[] = [
     {
       image: '/ProjectsSS/MyFlixAngular.png',
@@ -87,10 +91,11 @@ export default function ProjectsComponent() {
     <div className='relative'>
       <AnimatedBackground />
       <section className="bg-gray-900 flex flex-col items-center justify-center p-8 text-gray-900">
-
+        <ProjectModal isOpen={isOpen} isClosed={() => setIsOpen(false)} project={modalProject}/>
         <div className="text-2xl font-semibold mb-6">Featured Projects!!</div>
         <div className="mx-auto my-[100px] w-full max-w-[500px] pb-[100px]">
           {featuredProject.map((card, i) => (
+            
             <ScrollAnimation delay={i * 0.5} key={card.name}>
               <Card i={i} hueA={card.hueA} hueB={card.hueB} key={card.name} imageUrl={card.imageUrl}
               >
@@ -103,6 +108,24 @@ export default function ProjectsComponent() {
                       {card.description}
                     </div>
                     <div className='flex justify-around w-full mt-4 p-3'>
+                      <button
+                        className="text-sm font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline hover:cursor-pointer text-center"
+                        onClick={() => { setIsOpen(true); setModalProject(card); }}
+                      >
+                        More Info
+                      </button>
+
+                    </div>
+                    <div className='flex justify-around w-full mt-4 p-3'>
+                      <a
+                        href={featuredProject[i]?.homepage || featuredProject[i]?.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm  font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center
+                      hover:cursor-pointer"
+                      >
+                        🔗 Live demo
+                      </a>
                       <a
                         href={featuredProject[i]?.html_url}
                         target="_blank"
@@ -112,16 +135,12 @@ export default function ProjectsComponent() {
                       >
                         🔗 View on GitHub
                       </a>
+
+
                     </div>
-                    <a
-                      href={featuredProject[i]?.homepage || featuredProject[i]?.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm  font-medium text-shadow-2xs text-blue-600 dark:text-blue-400 hover:underline text-center
-                      hover:cursor-pointer"
-                    >
-                      🔗 Live demo
-                    </a>
+
+
+
 
                   </div>
                 </div>
