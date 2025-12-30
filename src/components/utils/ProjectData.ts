@@ -7,7 +7,6 @@ export async function getProjectsData() {
   if (projects.length === 0) {
     return console.error('No projects found');
   }
-  console.log('Projects', projects);
   return projects;
 }
 
