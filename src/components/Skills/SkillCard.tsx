@@ -1,11 +1,11 @@
 import { X } from 'lucide-react';
+import { getProjectsData } from '../utils/ProjectData';
 
 interface Project {
   id: number;
   title: string;
   description: string;
   skills: string[];
-  image: string;
 }
 
 interface ProjectsSectionProps {
@@ -16,70 +16,66 @@ interface ProjectsSectionProps {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
-    description: 'A full-stack e-commerce solution with payment integration and admin dashboard.',
-    skills: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80'
+    title: 'Jango Recipes',
+    description: 'Full-stack recipe management application with user authentication, recipe creation, and structured data handling.',
+    skills: ['Python', 'Django', 'PostgreSQL', 'HTML/CSS', 'JavaScript','Azure','SQL'],
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description: 'Real-time collaborative task management with drag-and-drop functionality.',
-    skills: ['React', 'TypeScript', 'Express', 'MongoDB', 'Redux'],
-    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80'
+    title: 'Portfolio Website',
+    description: 'Personal portfolio showcasing projects, skills, and experience with responsive design and modern UI.',
+    skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS','Vercel','Firebase' ],
   },
   {
     id: 3,
-    title: 'Social Media Dashboard',
-    description: 'Analytics dashboard for tracking social media metrics across platforms.',
-    skills: ['Next.js', 'TypeScript', 'GraphQL', 'PostgreSQL', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'
+    title: 'MyFlix Angular',
+    description: 'Movie database client built with Angular consuming a RESTful API for browsing, filtering, and managing movies.',
+    skills: ['Angular.js', 'TypeScript', 'REST APIs', 'Netlify',"MongoDB",'Node.js','Express' ],
   },
   {
     id: 4,
-    title: 'Weather Forecast App',
-    description: 'Beautiful weather application with location-based forecasts.',
-    skills: ['React', 'JavaScript', 'REST APIs', 'HTML/CSS'],
-    image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&q=80'
+    title: 'MyFlix React',
+    description: 'Single-page movie application built with React, featuring user authentication and API-driven data.',
+    skills: ['React', 'JavaScript', 'REST APIs', 'SCSS','Netlify','MongoDB','Node.js','Express'],
   },
   {
     id: 5,
-    title: 'Blog Platform',
-    description: 'Content management system with markdown support and SEO optimization.',
-    skills: ['Next.js', 'Node.js', 'MongoDB', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80'
+    title: 'Tacos El Puebla',
+    description: 'Business website for a local restaurant featuring menu display, contact information, and responsive layout.',
+    skills: ['HTML/CSS', 'JavaScript', 'Bootstrap','Cloudflare' ],
   },
   {
     id: 6,
-    title: 'Portfolio Website',
-    description: 'Modern portfolio site with animations and responsive design.',
-    skills: ['React', 'TypeScript', 'Tailwind CSS', 'Vue.js'],
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80'
+    title: 'Chat App',
+    description: 'Real-time chat application with user authentication and cloud-based data storage.',
+    skills: ['React', 'Firebase', 'JavaScript','React Native','Node.js' ],
+  },
+  {
+    id: 7,
+    title: 'Meet App',
+    description: 'Serverless event management app with offline support, data visualization, and API integration.',
+    skills: ['React', 'AWS', 'REST APIs', 'JavaScript','Serverless'],
+  },
+  {
+    id: 8,
+    title: 'Pokédex App',
+    description: 'Interactive Pokédex application consuming an external API to display Pokémon data and details.',
+    skills: ['React', 'JavaScript', 'REST APIs', 'HTML/CSS'],
   }
 ];
 
 export default function SkillCard({ selectedSkill, onClearFilter }: ProjectsSectionProps) {
   const filteredProjects = selectedSkill
-    ? projects.filter(project => 
-        project.skills.some(skill => 
-          skill.toLowerCase() === selectedSkill.toLowerCase()
-        )
+    ? projects.filter(project =>
+      project.skills.some(skill =>
+        skill.toLowerCase() === selectedSkill.toLowerCase()
       )
+    )
     : projects;
 
   return (
-    <div className="mt-16">
+    <div >
       <div className="flex items-center justify-between mb-8">
-        <div>
-          <h2 className="text-white mb-2">Projects</h2>
-          <p className="text-gray-400">
-            {selectedSkill 
-              ? `Showing projects using ${selectedSkill}`
-              : 'All projects'
-            }
-          </p>
-        </div>
-        
         {selectedSkill && (
           <button
             onClick={onClearFilter}
@@ -105,13 +101,6 @@ export default function SkillCard({ selectedSkill, onClearFilter }: ProjectsSect
                 key={project.id}
                 className="bg-gray-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-gray-900/50"
               >
-                <div className="h-48 overflow-hidden bg-gray-700">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <div className="p-6">
                   <h3 className="text-white mb-2">{project.title}</h3>
                   <p className="text-gray-400 mb-4">
@@ -121,11 +110,10 @@ export default function SkillCard({ selectedSkill, onClearFilter }: ProjectsSect
                     {project.skills.map((skill) => (
                       <span
                         key={skill}
-                        className={`px-3 py-1 rounded-md text-sm ${
-                          selectedSkill && skill.toLowerCase() === selectedSkill.toLowerCase()
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-gray-700 text-gray-300'
-                        }`}
+                        className={`px-3 py-1 rounded-md text-sm ${selectedSkill && skill.toLowerCase() === selectedSkill.toLowerCase()
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-700 text-gray-300'
+                          }`}
                       >
                         {skill}
                       </span>

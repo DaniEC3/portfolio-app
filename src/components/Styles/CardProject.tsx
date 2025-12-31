@@ -23,7 +23,7 @@ export default function Card({ hueA, i, children }: CardProps) {
 
   return (
     <motion.div
-      className={`relative overflow-hidden flex justify-center items-center pt-5 -mb-[50px] card-container-${i}`}
+      className={`relative overflow-hidden flex justify-center items-center -mb-[30px] mt-3 card-container-${i}`}
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ amount: 0.8 }}

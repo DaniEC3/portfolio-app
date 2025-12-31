@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { Code, Server, Users } from 'lucide-react';
 import SkillCard from './SkillCard';
-import { getProjectsData, filteredProjectsBySkill } from '../utils/ProjectData'
 
 interface GitHubRepo {
   id: number;
@@ -25,56 +24,24 @@ interface GitHubRepo {
   // ... other repository properties
 }
 
-
-// const frontend: Skill[] = [
-//   { name: "HTML", color: "#E34F26", level: 95 },        // orange-red
-//   { name: "CSS", color: "#1572B6", level: 90 },         // blue
-//   { name: "JavaScript", color: "#F7DF1E", level: 85 },  // yellow
-//   { name: "TypeScript", color: "#3178C6", level: 80 },  // blue
-//   { name: "React", color: "#61DAFB", level: 85 },       // cyan
-//   { name: "Next.js", color: "#000000", level: 80 },     // black
-//   { name: "Angular", color: "#DD0031", level: 70 },     // red
-//   { name: "Tailwind CSS", color: "#06B6D4", level: 85 },// teal
-//   { name: "Framer Motion", color: "#E83E8C", level: 75 }// pink
-// ];
-
-// const backend: Skill[] = [
-//   { name: "Node.js", color: "#339933", level: 80 },
-//   { name: "Express", color: "#000000", level: 75 },
-//   { name: "REST APIs", color: "#4B5563", level: 85 },
-//   { name: "MongoDB", color: "#47A248", level: 80 },
-//   { name: "Firebase", color: "#FFCA28", level: 70 },       // yellow-orange
-//   { name: "Auth (JWT/OAuth)", color: "#FBBF24", level: 75 },
-//   { name: "Testing", color: "#6B7280", level: 65 }
-// ];
-
-// const soft: Skill[] = [
-//   { name: "Communication", color: "#3B82F6", level: 90 },
-//   { name: "Teamwork", color: "#10B981", level: 85 },
-//   { name: "Problem Solving", color: "#FACC15", level: 80 },
-//   { name: "Adaptability", color: "#8B5CF6", level: 85 },
-//   { name: "Time Management", color: "#EC4899", level: 80 },
-//   { name: "Leadership", color: "#6366F1", level: 75 },
-//   { name: "Creativity", color: "#EF4444", level: 85 },
-//   { name: "Attention to Detail", color: "#9CA3AF", level: 80 }
-// ];
-
-
-
 export default function SkillsComponent() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const skills = {
     frontend: [
       'React', 'Next.js', 'TypeScript', 'Tailwind CSS',
-      'JavaScript', 'HTML/CSS', 'Redux', 'Vue.js'
+      'JavaScript', 'HTML/CSS', 'Angular.js', 'Bootstrap',
+      'SCSS'
     ],
     backend: [
       'Node.js', 'Express', 'PostgreSQL', 'MongoDB',
-      'REST APIs', 'GraphQL', 'Python', 'Docker'
+      'REST APIs', 'SQL', 'Python', 'Django','Azure',
+      'AWS', 'Serverless','Netlify','Vercel'
+
     ],
     soft: [
-      'Team Collaboration', 'Problem Solving', 'Communication',
-      'Time Management', 'Adaptability', 'Critical Thinking'
+      'Adaptability', 'Problem Solving', 'Recursivity',
+      'Time Management', 'Creativity', 'Critical Thinking',
+      'Leadership', 'Teamwork'
     ]
   };
 
@@ -90,7 +57,7 @@ export default function SkillsComponent() {
   };
 
   return (
-    <div className='relative w-screen h-screen md:h-screen flex flex-col items-center justify-center gap-5 px-10 mb-120'>
+    <div className='relative w-full h-full flex flex-col items-center justify-center gap-5 px-10 mb-120'>
       <div className='font-bold text-3xl text-center p-4 mb-5'>My skills</div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-0 bg-gray-800 rounded-lg overflow-hidden">
         {/* Frontend Skills */}
