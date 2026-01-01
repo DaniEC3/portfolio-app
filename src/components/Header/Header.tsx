@@ -74,13 +74,14 @@ export default function HeaderComponent() {
           <Image
             src={'/logo/LogoName-W-nb.png'}
             width={400}
-            height={400}
+            height={120}
             className={clsx(
               'object-cover',
               'transition-all duration-300',
               isAtTop ? 'h-25 opacity-100 cursor-crosshair' : 'h-50 opacity-0',
               'hover:animate-glitch'
             )}
+            style={{ width: 400, height: 120 }}
             alt='Logo'
           />
         </div>

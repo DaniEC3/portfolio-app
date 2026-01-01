@@ -4,24 +4,9 @@ import { useEffect, useState } from 'react';
 import { Github, Linkedin, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import ValidationModal from './ValidationModal';
-
-// Firebase configuration - Replace with your Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyCLkLUIBKgi99nKKtPO28KF-qVqfLs90wo",
-  authDomain: "my-portfolio-e240a.firebaseapp.com",
-  projectId: "my-portfolio-e240a",
-  storageBucket: "my-portfolio-e240a.firebasestorage.app",
-  messagingSenderId: "470058553778",
-  appId: "1:470058553778:web:0a0f9f3311b49e7c9314ab",
-  measurementId: "G-HXBT2XBM66"
-};
-
-// Initialize Firebase (you might want to do this in a separate firebase.js file)
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 // Types
 interface FormData {
