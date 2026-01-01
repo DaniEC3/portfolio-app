@@ -1,9 +1,9 @@
-import HeaderComponent from '@/components/Header';
+import HeaderComponent from '@/components/Header/Header';
 import FooterComponent from "@/components/Footer/Footer";
-import ProjectsComponent from "@/components/Projects";
-import AboutComponent from "@/components/About";
-import HeroComponent from "@/components/Hero";
-import SkillsComponent from '@/components/Skills';
+import ProjectsComponent from "@/components/Projects/Projects";
+import AboutComponent from "@/components/About/About";
+import HeroComponent from "@/components/Hero/Hero";
+import SkillsComponent from '@/components/Skills/Skills';
 
 
 

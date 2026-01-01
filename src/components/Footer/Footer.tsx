@@ -270,7 +270,7 @@ export default function Footer() {
                     type="button"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                    className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r bg-gray-70 text-white rounded-lg hover:bg-gra-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                     whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
                   >
