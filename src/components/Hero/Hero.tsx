@@ -22,18 +22,23 @@ export default function HeroComponent() {
             </h1>
           </ScrollAnimation>
           <ScrollAnimation delay={0.5}>
-            <p className=" text-gray-950 text-xl sm:text-2xl max-md: m-5 text-shadow-sm
-            max-w-2xl">
-              A full-stack developer driven by curiosity, problem-solving, and a genuine passion for writing good code.            </p>
-          </ScrollAnimation >
+            <p className=" text-gray-950 text-xl sm:text-2xl max-md: m-5 text-shadow-sm max-w-2xl">
+              A full-stack developer driven by curiosity, problem-solving, and a genuine passion for writing good code.
+            </p>
+          </ScrollAnimation>
           <ScrollAnimation delay={1}>
-            <a href="#projects" >
-              <button className="px-6 py-3 bg-gray-800 text-white
-              font-semibold rounded-lg shadow hover:scale-105 transition text-shadow-sm my-7 ">
-                See My Work
-              </button>
-
-            </a>
+            <div className="flex flex-col items-center gap-3 my-7">
+              <a href="#projects">
+                <button className="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg shadow hover:scale-105 hover:cursor-pointer transition text-shadow-sm">
+                  See My Work
+                </button>
+              </a>
+              <a href="/pdf/Daniel_Estrada_Resume.pdf" download>
+                <button className="px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg shadow hover:scale-105 hover:cursor-pointer transition text-shadow-sm dark:bg-blue-700">
+                  Download Resume
+                </button>
+              </a>
+            </div>
           </ScrollAnimation>
         </div>
         <ScrollAnimation delay={1.5}>

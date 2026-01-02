@@ -61,8 +61,8 @@ export default function HeaderComponent() {
 
 
       )}>
-        <div className='w-full justify-end'>
-          <ThemeToggleComponent />
+        <div className='w-full justify-end mt-3'>
+          {/* <ThemeToggleComponent /> */}
         </div>
 
         <div className={clsx(
