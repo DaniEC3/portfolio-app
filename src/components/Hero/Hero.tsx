@@ -15,17 +15,16 @@ export default function HeroComponent() {
         <div className="flex flex-col p-4">
           <ScrollAnimation>
             <h1 className={clsx("text-gray-950  text-4xl sm:text-5xl font-bold mb-4",
-             "text-shadow-lg font-sans",
+              "text-shadow-lg font-sans",
             )}>
               Hello, I am 	&lt;
-                <TypewriterClient word={'Daniel Estrada'} /> /	&gt;
+              <TypewriterClient word={'Daniel Estrada'} /> /	&gt;
             </h1>
           </ScrollAnimation>
           <ScrollAnimation delay={0.5}>
             <p className=" text-gray-950 text-xl sm:text-2xl max-md: m-5 text-shadow-sm
             max-w-2xl">
-              I am a Full-stack-Web Developer passionate about crafting clean, modern web experiences using toosl like React, Next.js, and Tailwind CSS.
-            </p>
+              A full-stack developer driven by curiosity, problem-solving, and a genuine passion for writing good code.            </p>
           </ScrollAnimation >
           <ScrollAnimation delay={1}>
             <a href="#projects" >

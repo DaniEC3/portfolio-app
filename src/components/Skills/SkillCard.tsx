@@ -1,5 +1,4 @@
 import { X } from 'lucide-react';
-import { getProjectsData } from '../utils/ProjectData';
 
 interface Project {
   id: number;
