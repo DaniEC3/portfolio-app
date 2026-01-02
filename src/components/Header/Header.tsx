@@ -72,7 +72,7 @@ export default function HeaderComponent() {
 
         )}>
           <Image
-            src={'/logo/LogoName-W-nb.png'}
+            src={'/Logo/LogoName-W-nb.png'}
             width={400}
             height={120}
             className={clsx(
