@@ -134,8 +134,6 @@ export default function ProjectsComponent() {
 
   }, []);
 
-  console.log('Filtered projects:', featuredProject);
-
   return (
     <div className='relative'>
       <AnimatedBackground />
