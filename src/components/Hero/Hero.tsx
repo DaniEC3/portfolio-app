@@ -6,7 +6,7 @@ import { AnimatedBackground } from "../Styles/AnimatedBackground";
 
 export default function HeroComponent() {
   return (
-    <div className=" relative h-screen flex items-center justify-center ">
+    <div className=" relative h-full  flex items-center justify-center ">
       <AnimatedBackground />
 
       <section className={clsx("flex flex-col xl:flex-row xl:gap-24 justify-center items-center text-center",
@@ -52,7 +52,7 @@ export default function HeroComponent() {
             alt="Daniel profile"
             width={400}
             height={400}
-            className=" mask-radial-at-center mask-radial-from-60% mask-radial-to-70% mt-10 md:mt-0 xl:w-[600px]
+            className=" mask-radial-at-center mask-radial-from-60% mask-radial-to-70% md:mb-0 mb-80 md:mt-0 xl:w-[600px]
             "
           />
         </ScrollAnimation>
