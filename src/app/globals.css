@@ -6,11 +6,15 @@
   --text-color: 17 24 39;
 }
 
-.dark {
+html {
+  scroll-behavior: smooth;
+}
+
+/* .dark {
   --primary-color: 255 255 255;
   --background-color: 15 23 42;
   --text-color: 229 231 235;
-}
+} */
 
 /* @media (prefers-color-scheme: dark) {
   :root {

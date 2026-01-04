@@ -3,8 +3,6 @@ import { BriefcaseBusiness, BrainCircuit, House } from 'lucide-react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-
-import ThemeToggleComponent from './ThemeToggle';
 import GlitchIconWrapper from '../Styles/GlitchIconWrapper';
 
 
@@ -44,7 +42,6 @@ export default function HeaderComponent() {
       const scrollY = window.scrollY;
       const atTop = scrollY < 10;
       setIsAtTop(atTop);
-      // console.log('Scroll position:', scrollY, 'Is at top:', atTop); // Debugging line
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -52,18 +49,18 @@ export default function HeaderComponent() {
   }, []);
 
   return (
-    <div>
+    <div className='h-80 md:h-60'>
       <header className={clsx(
         'text-gray-800 bg-gradient-to-b flex flex-col items-center gap-4',
         'w-full z-50 transition-all duration-500 fixed top-0 left-0',
         'from-gray-800 from-16% via-gray-700  to-gray-200 group/header',
         'mask-b-from-80% mask-b-to-100%',
-        isAtTop ? 'h-80-sm h-60 opacity-100 py-4 h-50-s hover:h-65' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
+        isAtTop ? 'h-80 opacity-100 py-4 hover:h-82' : 'opacity-60 py-2 h-30 backdrop-blur-md hover:opacity-90 hover:h-35',
 
 
       )}>
-        <div className='w-full justify-end'>
-          <ThemeToggleComponent />
+        <div className='w-full justify-end mt-8'>
+          {/* <ThemeToggleComponent /> */}
         </div>
 
         <div className={clsx(
@@ -73,15 +70,16 @@ export default function HeaderComponent() {
 
         )}>
           <Image
-            src={'/logo/LogoName-W-nb.png'}
+            src={'/Logo/LogoName-W-nb.png'}
             width={400}
-            height={400}
+            height={120}
             className={clsx(
               'object-cover',
               'transition-all duration-300',
               isAtTop ? 'h-25 opacity-100 cursor-crosshair' : 'h-50 opacity-0',
               'hover:animate-glitch'
             )}
+            style={{ width: 400, height: 120 }}
             alt='Logo'
           />
         </div>

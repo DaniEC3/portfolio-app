@@ -3,5 +3,5 @@ export interface GitHubProject {
   description?: string;
   topics?: string[];
   html_url?: string;
-  [key: string]: any;
+  // [key: string]: any;
 }

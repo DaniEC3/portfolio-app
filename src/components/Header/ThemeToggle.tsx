@@ -31,8 +31,8 @@ export default function ThemeToggleComponent() {
       onClick={toggleTheme}
       className="px-4 py-2  text-sm font-medium  "
     >
-      <Eclipse className="text-gray-400 hover:scale-125 transition-transform
-              w-6 h-6 cursor-crosshair dark:hover:text-cyan-500 hover:text-white" />
+      <Eclipse className="text-gray-400 hover:scale-110 transition-transform
+              w-6 h-6 cursor-crosshair hover:text-white" />
     </button>
   );
 }

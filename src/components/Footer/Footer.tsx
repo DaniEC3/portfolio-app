@@ -1,27 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Github, Linkedin, Mail, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
+import { Github, Linkedin, Send, ArrowDown, CheckCircle, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import ValidationModal from './ValidationModal';
-
-// Firebase configuration - Replace with your Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyCLkLUIBKgi99nKKtPO28KF-qVqfLs90wo",
-  authDomain: "my-portfolio-e240a.firebaseapp.com",
-  projectId: "my-portfolio-e240a",
-  storageBucket: "my-portfolio-e240a.firebasestorage.app",
-  messagingSenderId: "470058553778",
-  appId: "1:470058553778:web:0a0f9f3311b49e7c9314ab",
-  measurementId: "G-HXBT2XBM66"
-};
-
-// Initialize Firebase (you might want to do this in a separate firebase.js file)
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 // Types
 interface FormData {
@@ -135,10 +120,9 @@ export default function Footer() {
   };
 
   const socialLinks: SocialLink[] = [
-    { icon: Linkedin, href: 'https://linkedin.com/in/yourprofile', label: 'LinkedIn' },
-    { icon: Github, href: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: X, href: 'https://twitter.com/yourusername', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:your.email@example.com', label: 'Email' }
+    { icon: Linkedin, href: 'www.linkedin.com/in/daniel-estrada-calderon-a98309300', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/DaniEC3', label: 'GitHub' },
+    { icon: X, href: 'https://x.com/3_zudad', label: 'X' },
   ];
 
   return (
