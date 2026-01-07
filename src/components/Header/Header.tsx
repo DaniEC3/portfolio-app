@@ -49,7 +49,7 @@ export default function HeaderComponent() {
   }, []);
 
   return (
-    <div className='md:h-60 h-100'>
+    <div className='h-80 md:h-60'>
       <header className={clsx(
         'text-gray-800 bg-gradient-to-b flex flex-col items-center gap-4',
         'w-full z-50 transition-all duration-500 fixed top-0 left-0',

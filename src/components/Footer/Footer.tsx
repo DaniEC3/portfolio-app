@@ -120,12 +120,12 @@ export default function Footer() {
   };
 
   const socialLinks: SocialLink[] = [
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/danielestradac', label: 'LinkedIn' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/daniel-estrada-calderon-a98309300/', label: 'LinkedIn' },
     { icon: Github, href: 'https://github.com/DaniEC3', label: 'GitHub' },
     { icon: X, href: 'https://x.com/3_zudad', label: 'X' },
   ];
 
-  return (
+  return ( 
     <footer
       className={clsx(
         'fixed bottom-0 w-full transition-all duration-500 ease-out overflow-hidden',

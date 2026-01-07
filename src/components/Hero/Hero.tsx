@@ -6,11 +6,11 @@ import { AnimatedBackground } from "../Styles/AnimatedBackground";
 
 export default function HeroComponent() {
   return (
-    <div className=" relative h-screen flex items-center justify-center ">
+    <div className=" relative min-h-[calc(100vh-320px)] md:min-h-[calc(100vh-240px)] flex items-center justify-center py-8 md:py-12">
       <AnimatedBackground />
 
       <section className={clsx("flex flex-col xl:flex-row xl:gap-24 justify-center items-center text-center",
-        "h-screen xl:pr-12 transition-all duration-500  xl:mt-0 "
+        "w-full xl:pr-12 transition-all duration-500 px-4"
       )}>
         <div className="flex flex-col p-4 ">
           <ScrollAnimation>
@@ -52,7 +52,7 @@ export default function HeroComponent() {
             alt="Daniel profile"
             width={400}
             height={400}
-            className=" mask-radial-at-center mask-radial-from-60% mask-radial-to-70% mt-10 md:mt-0 xl:w-[600px]
+            className=" mask-radial-at-center mask-radial-from-60% mask-radial-to-70% mt-4 md:mt-0 xl:w-[600px] max-w-[300px] md:max-w-full
             "
           />
         </ScrollAnimation>
