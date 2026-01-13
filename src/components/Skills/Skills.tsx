@@ -129,6 +129,12 @@ export default function SkillsComponent() {
         </div>
       </div>
       <div className="w-full max-w-7xl mt-8">
+            <div className="flex items-center justify-between mb-4 px-1">
+              <h2 className="text-2xl md:text-3xl text-gray-800 font-bold">Projects</h2>
+              <span className="text-sm md:text-base text-gray-800">
+                {selectedSkill ? `Filter: ${selectedSkill}` : 'No filter applied'}
+              </span>
+            </div>
         <SkillCard selectedSkill={selectedSkill} onClearFilter={() => setSelectedSkill(null)} />
       </div>
 
